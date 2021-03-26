@@ -13,12 +13,12 @@
         <delete dir="${build.dir}"/>
     </target>
 
-    <target name="build">
+    <target name="compile">
         <mkdir dir="${classes.dir}"/>
         <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
     </target>
 
-    <target name="jar" depends="build">
+    <target name="jar" depends="compile">
         <mkdir dir="${jar.dir}"/>
         <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
             <manifest>

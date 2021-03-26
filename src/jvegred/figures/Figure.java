@@ -25,10 +25,8 @@ public abstract class Figure {
      * figure they will have to resize it.
      */
     protected Figure(int x, int y, float angle, Paint fill) {
-        this.x = x;
-        this.y = y;
-        this.w = 0;
-        this.h = 0;
+        this.x = x; this.y = y;
+        this.w = 0; this.h = 0;
 
         this.angle = angle;
 
@@ -36,55 +34,50 @@ public abstract class Figure {
     }
 
     public void paint(Graphics2D g2d) {
+        // common behaviour of paint method for all figures
         // all figures should be able to rotate
         g2d.rotate(Math.toRadians(this.angle), this.x, this.y);
         // rest of painting behaviour defined in each class
+        // must call super.paint(g2d) or paste the code above
     }
 
-    public void setFill(Paint fill) {
-        this.fill = fill;
-    }
-
-    public Paint getFill() {
-        return this.fill;
-    }
+    public void setFill(Paint fill) { this.fill = fill; }
+    public Paint getFill() { return this.fill; }
 
     public void move(int dx, int dy) {
-        this.x += dx;
-        this.y += dy;
+        this.x += dx; this.y += dy;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
+    public void setX(int x) { this.x = x; }
+    public int getX() { return this.x; }
 
-    public int getX() {
-        return this.x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public int getY() {
-        return this.y;
-    }
+    public void setY(int y) { this.y = y; }
+    public int getY() { return this.y;}
 
     public void resize(int dx, int dy, int dw, int dh) {
+        // actual resize operation
         this.move(dx, dy);
-        this.w += this.w + dw - dx >= 0 ? dw - dx : 0;
-        this.h += this.h + dh - dy >= 0 ? dh - dy : 0;
+        this.w += dw - dx;
+        this.h += dh - dy;
+
+        // downside right moving behaviour bug fix
+        // (w, h) can't be less than (0, 0)
+        // (x, y) can't increase when (w, h) are less than 0
+        if (this.w < 0) {
+            this.x -= dx;
+            this.w = 0;
+        }
+
+        if (this.h < 0) {
+            this.y -= dy;
+            this.h = 0;
+        }
     }
 
     public void rotate(float dangle) {
         this.angle += dangle;
     }
 
-    public void setRotationAngle(float angle) {
-        this.angle = angle;
-    }
-
-    public float getRotationAngle() {
-        return this.angle;
-    }
+    public void setRotationAngle(float angle) { this.angle = angle; }
+    public float getRotationAngle() { return this.angle; }
 }

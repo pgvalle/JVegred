@@ -3,9 +3,10 @@ package jvegred.figures;
 import java.awt.Paint;
 
 /**
- * 2 Dimentional Geometric shapes
+ * Class for 2 Dimentional Geometric shapes
  * 
- * @author Pedro Gabriel Nogueira
+ * @author Pedro Gabriel do Valle Nogueira
+ * @author pgvalle.nogueira@gmail.com
  */
 public abstract class Geometric2DF extends Figure {
 

@@ -3,6 +3,10 @@ package jvegred.figures;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 
+/**
+ * @author Pedro Gabriel do Valle Nogueira
+ * @author pgvalle.nogueira@gmail.com
+ */
 public class TriangleF extends Geometric2DF {
 
     private int[] xOutline, xFill;

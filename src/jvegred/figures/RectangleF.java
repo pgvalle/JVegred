@@ -11,15 +11,18 @@ public class RectangleF extends Geometric2DF {
 
     @Override
     public void paint(Graphics2D g2d) {
-        // must call to apply rotations
+        // applying rotations
         super.paint(g2d);
-
-        // drawing inner part
-        g2d.setPaint(this.fill);
-        g2d.fillRect(this.x, this.y, this.w, this.h);
 
         // draw outline
         g2d.setPaint(this.outline);
-        g2d.drawRect(this.x, this.y, this.w, this.h);
+        g2d.fillRect(this.x, this.y, this.w, this.h);
+
+        // drawing inner part
+        g2d.setPaint(this.fill);
+        g2d.fillRect(
+            this.x + this.outlineThickness, this.y + outlineThickness,
+            this.w - 2 * this.outlineThickness, this.h - 2 * this.outlineThickness
+        );
     }
 }

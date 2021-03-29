@@ -30,7 +30,7 @@ public abstract class Figure {
 
     public void paint(Graphics2D g2d) {
         // common behavior (all figures should be able to rotate)
-        g2d.rotate(Math.toRadians(this.angle), this.x, this.y);
+        g2d.rotate(Math.toRadians(this.angle), this.x + this.w / 2.0, this.y + this.h / 2.0);
         // rest of painting behavior must be defined
     }
 
@@ -49,7 +49,8 @@ public abstract class Figure {
     public int getY() { return this.y; }
 
     public void resize(int dx, int dy, int dw, int dh) {
-        this.move(dx, dy);
+        this.x += dx;
+        this.y += dy;
         // subtract (dx, dy) from (w, h) make resize effect
         this.w += dw - dx;
         this.h += dh - dy;

@@ -15,7 +15,6 @@ public abstract class Geometric2DF extends Figure {
 
     protected Geometric2DF(int x, int y, float angle, Paint fill, Paint outline, int outlineThickness) {
         super(x, y, angle, fill);
-
         this.outline = outline;
         this.outlineThickness = outlineThickness;
     }

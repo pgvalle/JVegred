@@ -11,6 +11,18 @@ public class EllypseF extends Geometric2DF {
 
     @Override
     public void paint(Graphics2D g2d) {
-        // TODO Auto-generated method stub
+        // applying rotations
+        super.paint(g2d);
+
+        // draw outline
+        g2d.setPaint(this.outline);
+        g2d.fillOval(this.x, this.y, this.w, this.h);
+
+        // drawing inner part
+        g2d.setPaint(this.fill);
+        g2d.fillOval(
+            this.x + this.outlineThickness, this.y + outlineThickness,
+            this.w - 2 * this.outlineThickness, this.h - 2 * this.outlineThickness
+        );
     }
 }

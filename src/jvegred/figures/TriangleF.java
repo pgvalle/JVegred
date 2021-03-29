@@ -30,12 +30,11 @@ public class TriangleF extends Geometric2DF {
         int dy = (int) (this.outlineThickness / Math.sin(ta));
 
         this.xFill[0] = this.x + this.w / 2;
-        this.yFill[0] = this.y + dy;
-
         this.xFill[1] = this.x + this.w - dx;
-        this.yFill[1] = this.y + this.h - this.outlineThickness;
-
         this.xFill[2] = this.x + dx;
+        
+        this.yFill[0] = this.y + dy;
+        this.yFill[1] = this.y + this.h - this.outlineThickness;
         this.yFill[2] = this.y + this.h - this.outlineThickness;
 
         if (this.yFill[1] - this.yFill[0] < 0) {
@@ -49,12 +48,11 @@ public class TriangleF extends Geometric2DF {
 
     private void setOutlinePoints() {
         this.xOutline[0] = this.x + this.w / 2;
-        this.yOutline[0] = this.y;
-
         this.xOutline[1] = this.x + this.w;
-        this.yOutline[1] = this.y + this.h;
-        
         this.xOutline[2] = this.x;
+
+        this.yOutline[0] = this.y;
+        this.yOutline[1] = this.y + this.h;
         this.yOutline[2] = this.y + this.h;
 
         if (this.yOutline[1] - this.yOutline[0] < 0) {
@@ -78,6 +76,28 @@ public class TriangleF extends Geometric2DF {
         // drawing inner part
         g2d.setPaint(this.fill);
         g2d.fillPolygon(this.xFill, this.yFill, 3);
+    }
+
+    @Override
+    public void move(int dx, int dy) {
+        this.x += dx;
+        this.y += dy;
+
+        this.xOutline[0] += dx;
+        this.xOutline[1] += dx;
+        this.xOutline[2] += dx;
+
+        this.xFill[0] += dx;
+        this.xFill[1] += dx;
+        this.xFill[2] += dx;
+        
+        this.yOutline[0] += dy;
+        this.yOutline[1] += dy;
+        this.yOutline[2] += dy;
+        
+        this.yFill[0] += dy;
+        this.yFill[1] += dy;
+        this.yFill[2] += dy;
     }
 
     @Override

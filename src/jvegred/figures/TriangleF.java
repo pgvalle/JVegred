@@ -12,7 +12,7 @@ public class TriangleF extends Geometric2DF {
     private int[] xOuter, yOuter;
     private int[] xInner, yInner;
 
-    public TriangleF(int x, int y, float angle, Paint fill, Paint outline, int outlineThickness) {
+    public TriangleF(int x, int y, Paint fill, Paint outline, int outlineThickness) {
         super(x, y, fill, outline, outlineThickness);
         // outer triangle points
         this.xOuter = new int[3];

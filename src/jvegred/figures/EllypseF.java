@@ -9,7 +9,7 @@ import java.awt.Paint;
  */
 public class EllypseF extends Geometric2DF {
 
-    public EllypseF(int x, int y, float angle, Paint fill, Paint outline, int outlineThickness) {
+    public EllypseF(int x, int y, Paint fill, Paint outline, int outlineThickness) {
         super(x, y, fill, outline, outlineThickness);
     }
 

@@ -8,7 +8,7 @@ public class LineF extends Figure {
 
     private int thickness;
 
-    public LineF(int x, int y, float angle, Paint paint, int thickness) {
+    public LineF(int x, int y, Paint paint, int thickness) {
         super(x, y, paint);
         this.thickness = thickness;
     }

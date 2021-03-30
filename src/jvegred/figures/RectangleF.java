@@ -9,7 +9,7 @@ import java.awt.Paint;
  */
 public class RectangleF extends Geometric2DF {
 
-    public RectangleF(int x, int y, float angle, Paint fill, Paint outline, int outlineThickness) {
+    public RectangleF(int x, int y, Paint fill, Paint outline, int outlineThickness) {
         super(x, y, fill, outline, outlineThickness);
     }
 

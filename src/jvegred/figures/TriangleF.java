@@ -103,7 +103,7 @@ public class TriangleF extends Geometric2DF {
     @Override
     public void resize(int dx, int dy, int dw, int dh) {
         super.resize(dx, dy, dw, dh);
-
+        // update inner and outer triangle points
         this.setOutlinePoints();
         this.setFillPoints();
     }

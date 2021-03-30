@@ -13,7 +13,6 @@ public abstract class Figure {
 
     protected int x, y;
     protected int w, h;
-    protected float angle;
     protected Paint fill;
 
     /**
@@ -21,55 +20,18 @@ public abstract class Figure {
      * always be initialized with (0, 0), because as soon as when the user
      * creates the figure they will have to "resize" it.
      */
-    protected Figure(int x, int y, float angle, Paint fill) {
+    protected Figure(int x, int y, Paint fill) {
         this.x = x;
         this.y = y;
         this.w = 0;
         this.h = 0;
-        this.angle = angle;
         this.fill = fill;
     }
 
-    public void paint(Graphics2D g2d) {
-        // all figures should be able to rotate
-        g2d.rotate(Math.toRadians(this.angle), this.x + this.w / 2.0, this.y + this.h / 2.0);
-    }
+    public abstract void paint(Graphics2D g2d);
+    public abstract void move(int dx, int dy);
+    public abstract void resize(int dx, int dy, int dw, int dh);
 
     public void setFill(Paint fill) { this.fill = fill; }
     public Paint getFill() { return this.fill; }
-
-    public void move(int dx, int dy) {
-        this.x += dx;
-        this.y += dy;
-    }
-
-    public void setX(int x) { this.x = x - this.w / 2; }
-    public int getX() { return this.x + this.w / 2; }
-
-    public void setY(int y) { this.y = y - this.h / 2; }
-    public int getY() { return this.y + this.h / 2; }
-
-    public void resize(int dx, int dy, int dw, int dh) {
-        this.x += (dx - dw) / 2;
-        this.y += (dy - dh) / 2;
-        //
-        this.w += dw - dx;
-        this.h += dh - dy;
-
-        // (w, h) can't be less than (0, 0)
-        // subtract (dx, dy) from (x, y) to stop downside-right moving behavior
-        if (this.w < 0) {
-            this.x -= (dx - dw) / 2;
-            this.w = 0;
-        }
-        if (this.h < 0) {
-            this.y -= (dy - dh) / 2;
-            this.h = 0;
-        }        
-    }
-
-    public void rotate(float da) { this.angle += da; }
-
-    public void setRotationAngle(float a) { this.angle = a; }
-    public float getRotationAngle() { return this.angle; }
 }

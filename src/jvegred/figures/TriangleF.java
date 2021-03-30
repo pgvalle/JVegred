@@ -13,9 +13,11 @@ public class TriangleF extends Geometric2DF {
     private int[] xInner, yInner;
 
     public TriangleF(int x, int y, float angle, Paint fill, Paint outline, int outlineThickness) {
-        super(x, y, angle, fill, outline, outlineThickness);
+        super(x, y, fill, outline, outlineThickness);
+        // outer triangle points
         this.xOuter = new int[3];
         this.yOuter = new int[3];
+        // inner triangle points
         this.xInner = new int[3];
         this.yInner = new int[3];
 
@@ -23,8 +25,44 @@ public class TriangleF extends Geometric2DF {
         this.setInnerPoints();
     }
 
+    @Override
+    public void paint(Graphics2D g2d) {
+        // outer triangle
+        g2d.setPaint(this.outline);
+        g2d.fillPolygon(this.xOuter, this.yOuter, 3);
+        // inner triangle
+        g2d.setPaint(this.fill);
+        g2d.fillPolygon(this.xInner, this.yInner, 3);
+    }
+
+    @Override
+    public void move(int dx, int dy) {
+        super.move(dx, dy);
+        // outer triangle points
+        this.xOuter[0] += dx;
+        this.yOuter[0] += dy;
+        this.xOuter[1] += dx;
+        this.yOuter[1] += dy;
+        this.xOuter[2] += dx;
+        this.yOuter[2] += dy;
+        // inner triangle points
+        this.xInner[0] += dx;
+        this.yInner[0] += dy;
+        this.xInner[1] += dx;
+        this.yInner[1] += dy;
+        this.xInner[2] += dx;
+        this.yInner[2] += dy;
+    }
+
+    @Override
+    public void resize(int dx, int dy, int dw, int dh) {
+        super.resize(dx, dy, dw, dh);
+        // update inner and outer triangle points
+        this.setOuterPoints();
+        this.setInnerPoints();
+    }
+
     private void setOuterPoints() {
-        // setup outer triangle points
         this.xOuter[0] = this.x + this.w / 2;
         this.yOuter[0] = this.y;
         this.xOuter[1] = this.x + this.w;
@@ -50,7 +88,6 @@ public class TriangleF extends Geometric2DF {
         int dx = (int) (this.outlineThickness / Math.tan(ba));
         int dy = (int) (this.outlineThickness / Math.sin(ta));
 
-        // setup inner triangle points
         this.xInner[0] = this.x + this.w / 2;
         this.yInner[0] = this.y + dy;
         this.xInner[1] = this.x + this.w - dx;
@@ -65,46 +102,5 @@ public class TriangleF extends Geometric2DF {
         if (this.yInner[1] - this.yInner[0] < 0) {
             this.yInner[2] = this.yInner[1] = this.yInner[0];
         }
-    }
-
-    @Override
-    public void paint(Graphics2D g2d) {
-        // rotations
-        super.paint(g2d);
-        // outer triangle
-        g2d.setPaint(this.outline);
-        g2d.fillPolygon(this.xOuter, this.yOuter, 3);
-        // inner triangle
-        g2d.setPaint(this.fill);
-        g2d.fillPolygon(this.xInner, this.yInner, 3);
-    }
-
-    @Override
-    public void move(int dx, int dy) {
-        // global coordinates
-        this.x += dx;
-        this.y += dy;
-        // outer triangle points
-        this.xOuter[0] += dx;
-        this.yOuter[0] += dy;
-        this.xOuter[1] += dx;
-        this.yOuter[1] += dy;
-        this.xOuter[2] += dx;
-        this.yOuter[2] += dy;
-        // inner triangle points
-        this.xInner[0] += dx;
-        this.yInner[0] += dy;
-        this.xInner[1] += dx;
-        this.yInner[1] += dy;
-        this.xInner[2] += dx;
-        this.yInner[2] += dy;
-    }
-
-    @Override
-    public void resize(int dx, int dy, int dw, int dh) {
-        super.resize(dx, dy, dw, dh);
-        // update inner and outer triangle points
-        this.setOuterPoints();
-        this.setInnerPoints();
     }
 }

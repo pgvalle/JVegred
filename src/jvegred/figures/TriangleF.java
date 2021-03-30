@@ -9,39 +9,39 @@ import java.awt.Paint;
  */
 public class TriangleF extends Geometric2DF {
 
-    private int[] xOutline, xFill;
-    private int[] yOutline, yFill;
+    private int[] xOuter, yOuter;
+    private int[] xInner, yInner;
 
     public TriangleF(int x, int y, float angle, Paint fill, Paint outline, int outlineThickness) {
         super(x, y, angle, fill, outline, outlineThickness);
-        this.xOutline = new int[3];
-        this.xFill = new int[3];
-        this.yOutline = new int[3];
-        this.yFill = new int[3];
+        this.xOuter = new int[3];
+        this.yOuter = new int[3];
+        this.xInner = new int[3];
+        this.yInner = new int[3];
 
-        this.setOutlinePoints();
-        this.setFillPoints();
+        this.setOuterPoints();
+        this.setInnerPoints();
     }
 
-    private void setOutlinePoints() {
+    private void setOuterPoints() {
         // setup outer triangle points
-        this.xOutline[0] = this.x + this.w / 2;
-        this.yOutline[0] = this.y;
-        this.xOutline[1] = this.x + this.w;
-        this.yOutline[1] = this.y + this.h;
-        this.xOutline[2] = this.x;
-        this.yOutline[2] = this.y + this.h;
+        this.xOuter[0] = this.x + this.w / 2;
+        this.yOuter[0] = this.y;
+        this.xOuter[1] = this.x + this.w;
+        this.yOuter[1] = this.y + this.h;
+        this.xOuter[2] = this.x;
+        this.yOuter[2] = this.y + this.h;
 
         // check if outer triangle points "passed" one another
-        if (this.xOutline[1] - this.xOutline[2] < 0) {
-            this.xOutline[1] = this.xOutline[2];
+        if (this.xOuter[1] - this.xOuter[2] < 0) {
+            this.xOuter[1] = this.xOuter[2];
         }
-        if (this.yOutline[1] - this.yOutline[0] < 0) {
-            this.yOutline[2] = this.yOutline[1] = this.yOutline[0];
+        if (this.yOuter[1] - this.yOuter[0] < 0) {
+            this.yOuter[2] = this.yOuter[1] = this.yOuter[0];
         }
     }
 
-    private void setFillPoints() {
+    private void setInnerPoints() {
         // use arctan to get bottom corner angle
         double ba = Math.atan(this.h / (this.w / 2.0)) / 2.0;
         // use bottom corner angle to get top angle
@@ -51,19 +51,19 @@ public class TriangleF extends Geometric2DF {
         int dy = (int) (this.outlineThickness / Math.sin(ta));
 
         // setup inner triangle points
-        this.xFill[0] = this.x + this.w / 2;
-        this.yFill[0] = this.y + dy;
-        this.xFill[1] = this.x + this.w - dx;
-        this.yFill[1] = this.y + this.h - this.outlineThickness;
-        this.xFill[2] = this.x + dx;
-        this.yFill[2] = this.y + this.h - this.outlineThickness;
+        this.xInner[0] = this.x + this.w / 2;
+        this.yInner[0] = this.y + dy;
+        this.xInner[1] = this.x + this.w - dx;
+        this.yInner[1] = this.y + this.h - this.outlineThickness;
+        this.xInner[2] = this.x + dx;
+        this.yInner[2] = this.y + this.h - this.outlineThickness;
 
         // check if inner triangle points "passed" one another
-        if (this.xFill[1] - this.xFill[2] < 0) {
-            this.xFill[1] = this.xFill[2];
+        if (this.xInner[1] - this.xInner[2] < 0) {
+            this.xInner[1] = this.xInner[2];
         }
-        if (this.yFill[1] - this.yFill[0] < 0) {
-            this.yFill[2] = this.yFill[1] = this.yFill[0];
+        if (this.yInner[1] - this.yInner[0] < 0) {
+            this.yInner[2] = this.yInner[1] = this.yInner[0];
         }
     }
 
@@ -73,10 +73,10 @@ public class TriangleF extends Geometric2DF {
         super.paint(g2d);
         // outer triangle
         g2d.setPaint(this.outline);
-        g2d.fillPolygon(this.xOutline, this.yOutline, 3);
+        g2d.fillPolygon(this.xOuter, this.yOuter, 3);
         // inner triangle
         g2d.setPaint(this.fill);
-        g2d.fillPolygon(this.xFill, this.yFill, 3);
+        g2d.fillPolygon(this.xInner, this.yInner, 3);
     }
 
     @Override
@@ -85,26 +85,26 @@ public class TriangleF extends Geometric2DF {
         this.x += dx;
         this.y += dy;
         // outer triangle points
-        this.xOutline[0] += dx;
-        this.yOutline[0] += dy;
-        this.xOutline[1] += dx;
-        this.yOutline[1] += dy;
-        this.xOutline[2] += dx;
-        this.yOutline[2] += dy;
+        this.xOuter[0] += dx;
+        this.yOuter[0] += dy;
+        this.xOuter[1] += dx;
+        this.yOuter[1] += dy;
+        this.xOuter[2] += dx;
+        this.yOuter[2] += dy;
         // inner triangle points
-        this.xFill[0] += dx;
-        this.yFill[0] += dy;
-        this.xFill[1] += dx;
-        this.yFill[1] += dy;
-        this.xFill[2] += dx;
-        this.yFill[2] += dy;
+        this.xInner[0] += dx;
+        this.yInner[0] += dy;
+        this.xInner[1] += dx;
+        this.yInner[1] += dy;
+        this.xInner[2] += dx;
+        this.yInner[2] += dy;
     }
 
     @Override
     public void resize(int dx, int dy, int dw, int dh) {
         super.resize(dx, dy, dw, dh);
         // update inner and outer triangle points
-        this.setOutlinePoints();
-        this.setFillPoints();
+        this.setOuterPoints();
+        this.setInnerPoints();
     }
 }

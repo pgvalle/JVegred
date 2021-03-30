@@ -22,8 +22,10 @@ public abstract class Figure {
      * creates the figure they will have to "resize" it.
      */
     protected Figure(int x, int y, float angle, Paint fill) {
-        this.x = x; this.y = y;
-        this.w = 0; this.h = 0;
+        this.x = x;
+        this.y = y;
+        this.w = 0;
+        this.h = 0;
         this.angle = angle;
         this.fill = fill;
     }
@@ -37,7 +39,8 @@ public abstract class Figure {
     public Paint getFill() { return this.fill; }
 
     public void move(int dx, int dy) {
-        this.x += dx; this.y += dy;
+        this.x += dx;
+        this.y += dy;
     }
 
     public void setX(int x) { this.x = x; }
@@ -47,9 +50,11 @@ public abstract class Figure {
     public int getY() { return this.y; }
 
     public void resize(int dx, int dy, int dw, int dh) {
-        this.x += dx; this.y += dy;
+        this.x += dx;
+        this.y += dy;
         // subtract (dx, dy) from (w, h) to make the resize effect
-        this.w += dw - dx; this.h += dh - dy;
+        this.w += dw - dx;
+        this.h += dh - dy;
 
         // (w, h) can't be less than (0, 0)
         // subtract (dx, dy) from (x, y) to stop downside-right moving behavior

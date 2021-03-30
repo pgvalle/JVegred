@@ -10,13 +10,11 @@ import java.awt.Paint;
 public class EllypseF extends Geometric2DF {
 
     public EllypseF(int x, int y, float angle, Paint fill, Paint outline, int outlineThickness) {
-        super(x, y, angle, fill, outline, outlineThickness);
+        super(x, y, fill, outline, outlineThickness);
     }
 
     @Override
     public void paint(Graphics2D g2d) {
-        // rotations
-        super.paint(g2d);
         // outer ellypse
         g2d.setPaint(this.outline);
         g2d.fillOval(this.x, this.y, this.w, this.h);

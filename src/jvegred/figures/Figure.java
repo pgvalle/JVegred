@@ -12,7 +12,7 @@ import java.awt.Paint;
 public abstract class Figure {
 
     protected int x, y;
-    protected int w, h; // will work as a second point for lines
+    protected int w, h;
     protected float angle;
     protected Paint fill;
 
@@ -29,7 +29,7 @@ public abstract class Figure {
     }
 
     public void paint(Graphics2D g2d) {
-        // common behavior (all figures should be able to rotate)
+        // all figures should be able to rotate
         g2d.rotate(Math.toRadians(this.angle), this.x + this.w / 2.0, this.y + this.h / 2.0);
     }
 
@@ -48,10 +48,10 @@ public abstract class Figure {
 
     public void resize(int dx, int dy, int dw, int dh) {
         this.x += dx; this.y += dy;
-        // subtracting (dx, dy) from (w, h) makes the resize effect
+        // subtract (dx, dy) from (w, h) to make the resize effect
         this.w += dw - dx; this.h += dh - dy;
 
-        // subtracting (dx, dy) from (x, y) stops downside-right moving behavior
+        // subtract (dx, dy) from (x, y) to stop downside-right moving behavior
         // (w, h) can't be less than (0, 0)
         if (this.w < 0) {
             this.x -= dx;

@@ -1,3 +1,4 @@
+// TODO Improve code documentation
 package jvegred;
 
 public class JVegredMain {

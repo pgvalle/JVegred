@@ -43,31 +43,29 @@ public abstract class Figure {
         this.y += dy;
     }
 
-    public void setX(int x) { this.x = x; }
-    public int getX() { return this.x; }
+    public void setX(int x) { this.x = x - this.w / 2; }
+    public int getX() { return this.x + this.w / 2; }
 
-    public void setY(int y) { this.y = y; }
-    public int getY() { return this.y; }
+    public void setY(int y) { this.y = y - this.h / 2; }
+    public int getY() { return this.y + this.h / 2; }
 
     public void resize(int dx, int dy, int dw, int dh) {
-        this.x += dx;
-        this.y += dy;
-        // subtract (dx, dy) from (w, h) to make the resize effect
+        this.x += (dx - dw) / 2;
+        this.y += (dy - dh) / 2;
+        //
         this.w += dw - dx;
         this.h += dh - dy;
 
         // (w, h) can't be less than (0, 0)
         // subtract (dx, dy) from (x, y) to stop downside-right moving behavior
         if (this.w < 0) {
-            this.x -= dx;
+            this.x -= (dx - dw) / 2;
             this.w = 0;
         }
         if (this.h < 0) {
-            this.y -= dy;
+            this.y -= (dy - dh) / 2;
             this.h = 0;
-        }
-
-        // TODO fix moving behavior when resizing rotated figures
+        }        
     }
 
     public void rotate(float da) { this.angle += da; }

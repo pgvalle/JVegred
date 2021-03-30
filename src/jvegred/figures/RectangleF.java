@@ -10,13 +10,11 @@ import java.awt.Paint;
 public class RectangleF extends Geometric2DF {
 
     public RectangleF(int x, int y, float angle, Paint fill, Paint outline, int outlineThickness) {
-        super(x, y, angle, fill, outline, outlineThickness);
+        super(x, y, fill, outline, outlineThickness);
     }
 
     @Override
     public void paint(Graphics2D g2d) {
-        // rotations
-        super.paint(g2d);
         // outer rectangle
         g2d.setPaint(this.outline);
         g2d.fillRect(this.x, this.y, this.w, this.h);

@@ -19,19 +19,9 @@ public abstract class Geometric2DF extends Figure {
         this.outlineThickness = outlineThickness;
     }
 
-    public void setOutlinePaint(Paint outline) {
-        this.outline = outline;
-    }
+    public void setOutlinePaint(Paint outline) { this.outline = outline; }
+    public Paint getOutlinePaint() { return this.outline; }
 
-    public Paint getOutlinePaint() {
-        return this.outline;
-    }
-
-    public void setOutlineThickness(int thickness) {
-        this.outlineThickness = thickness;
-    }
-
-    public int getOutlineThickness() {
-        return this.outlineThickness;
-    }
+    public void setOutlineThickness(int thickness) { this.outlineThickness = thickness; }
+    public int getOutlineThickness() { return this.outlineThickness; }
 }

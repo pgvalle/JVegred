@@ -84,14 +84,14 @@ public class TriangleF extends Geometric2DF {
         // global coordinates
         this.x += dx;
         this.y += dy;
-        // move outer triangle points
+        // outer triangle points
         this.xOutline[0] += dx;
         this.yOutline[0] += dy;
         this.xOutline[1] += dx;
         this.yOutline[1] += dy;
         this.xOutline[2] += dx;
         this.yOutline[2] += dy;
-        // move inner triangle points
+        // inner triangle points
         this.xFill[0] += dx;
         this.yFill[0] += dy;
         this.xFill[1] += dx;

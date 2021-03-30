@@ -51,8 +51,8 @@ public abstract class Figure {
         // subtract (dx, dy) from (w, h) to make the resize effect
         this.w += dw - dx; this.h += dh - dy;
 
-        // subtract (dx, dy) from (x, y) to stop downside-right moving behavior
         // (w, h) can't be less than (0, 0)
+        // subtract (dx, dy) from (x, y) to stop downside-right moving behavior
         if (this.w < 0) {
             this.x -= dx;
             this.w = 0;

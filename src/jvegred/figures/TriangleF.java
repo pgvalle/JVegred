@@ -1,8 +1,5 @@
 package jvegred.figures;
 
-import java.awt.Graphics2D;
-import java.awt.Paint;
-
 /**
  * @author Pedro Gabriel do Valle Nogueira
  * @author pgvalle.nogueira@gmail.com
@@ -12,7 +9,7 @@ public class TriangleF extends Geometric2DF {
     private int[] xOuter, yOuter;
     private int[] xInner, yInner;
 
-    public TriangleF(int x, int y, Paint fill, Paint outline, int outlineThickness) {
+    public TriangleF(int x, int y, java.awt.Paint fill, java.awt.Paint outline, int outlineThickness) {
         super(x, y, fill, outline, outlineThickness);
         // outer triangle points
         this.xOuter = new int[3];
@@ -26,7 +23,7 @@ public class TriangleF extends Geometric2DF {
     }
 
     @Override
-    public void paint(Graphics2D g2d) {
+    public void paint(java.awt.Graphics2D g2d) {
         // outer triangle
         g2d.setPaint(this.outline);
         g2d.fillPolygon(this.xOuter, this.yOuter, 3);

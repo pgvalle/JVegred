@@ -1,8 +1,5 @@
 package jvegred.figures;
 
-import java.awt.Graphics2D;
-import java.awt.Paint;
-
 /**
  * Base Class for Figures
  * 
@@ -13,14 +10,14 @@ public abstract class Figure {
 
     protected int x, y;
     protected int w, h;
-    protected Paint fill;
+    protected java.awt.Paint fill;
 
     /**
      * All paremeters are self-explanatory. Important thing is (w, h) will
      * always be initialized with (0, 0), because as soon as when the user
      * creates the figure they will have to "resize" it.
      */
-    protected Figure(int x, int y, Paint fill) {
+    protected Figure(int x, int y, java.awt.Paint fill) {
         this.x = x;
         this.y = y;
         this.w = 0;
@@ -28,10 +25,10 @@ public abstract class Figure {
         this.fill = fill;
     }
 
-    public abstract void paint(Graphics2D g2d);
+    public abstract void paint(java.awt.Graphics2D g2d);
     public abstract void move(int dx, int dy);
     public abstract void resize(int dx, int dy, int dw, int dh);
 
-    public void setFill(Paint fill) { this.fill = fill; }
-    public Paint getFill() { return this.fill; }
+    public void setFill(java.awt.Paint fill) { this.fill = fill; }
+    public java.awt.Paint getFill() { return this.fill; }
 }

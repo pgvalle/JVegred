@@ -1,19 +1,17 @@
 package jvegred.figures;
 
-import java.awt.Paint;
-
 /**
- * Class for 2 Dimentional Geometric shapes
+ * Base class for 2 dimentional geometric shapes
  * 
  * @author Pedro Gabriel do Valle Nogueira
  * @author pgvalle.nogueira@gmail.com
  */
 public abstract class Geometric2DF extends Figure {
 
-    protected Paint outline;
+    protected java.awt.Paint outline;
     protected int outlineThickness;
 
-    protected Geometric2DF(int x, int y, Paint fill, Paint outline, int outlineThickness) {
+    protected Geometric2DF(int x, int y, java.awt.Paint fill, java.awt.Paint outline, int outlineThickness) {
         super(x, y, fill);
         this.outline = outline;
         this.outlineThickness = outlineThickness;
@@ -45,11 +43,9 @@ public abstract class Geometric2DF extends Figure {
         this.y += dy;
     }
 
-    public void setOutlinePaint(Paint outline) { this.outline = outline; }
-    public Paint getOutlinePaint() { return this.outline; }
+    public void setOutlinePaint(java.awt.Paint outline) { this.outline = outline; }
+    public java.awt.Paint getOutlinePaint() { return this.outline; }
 
     public void setOutlineThickness(int thickness) { this.outlineThickness = thickness; }
-    public int getOutlineThickness() { return this.outlineThickness; }
-
-    
+    public int getOutlineThickness() { return this.outlineThickness; }    
 }

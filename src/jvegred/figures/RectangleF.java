@@ -1,17 +1,20 @@
 package jvegred.figures;
 
+import java.awt.Graphics2D;
+import java.awt.Paint;
+
 /**
  * @author Pedro Gabriel do Valle Nogueira
  * @author pgvalle.nogueira@gmail.com
  */
 public class RectangleF extends Geometric2DF {
 
-    public RectangleF(int x, int y, java.awt.Paint fill, java.awt.Paint outline, int outlineThickness) {
+    public RectangleF(int x, int y, Paint fill, Paint outline, int outlineThickness) {
         super(x, y, fill, outline, outlineThickness);
     }
 
     @Override
-    public void paint(java.awt.Graphics2D g2d) {
+    public void paint(Graphics2D g2d) {
         // outer rectangle
         g2d.setPaint(this.outline);
         g2d.fillRect(this.x, this.y, this.w, this.h);

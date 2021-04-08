@@ -11,9 +11,7 @@ public class Rectangle extends Geometric2D {
     
     @Override
     public void paint(Graphics2D g2d) {
-		super.paint(g2d);
-        // applying rotations
-		g2d.rotate(super.angle, super.x + super.w / 2.0, super.y + super.h / 2.0);
+        super.paint(g2d);
 		// drawing outline
 		g2d.setPaint(super.outline);
 		g2d.fillRect(super.x, super.y, super.w, super.h);

@@ -18,7 +18,7 @@ public class Triangle extends Geometric2D {
     }
 
     private void remapPoints() {
-        // outline triangle
+        // outline points
         this.xOutPoints[0] = this.x + this.w / 2;
         this.yOutPoints[0] = this.y;
         
@@ -28,7 +28,7 @@ public class Triangle extends Geometric2D {
         this.xOutPoints[2] = this.x;
         this.yOutPoints[2] = this.y + this.h;
 
-        // inside triangle
+        // inside points
         double angle = Math.atan(2.0 * this.h / this.w);
         int dx = (int) (this.outlineThickness / Math.tan(angle / 2.0));
         int dy = (int) (this.outlineThickness / Math.sin(Math.PI / 2.0 - angle));
@@ -46,19 +46,34 @@ public class Triangle extends Geometric2D {
     @Override
     public void paint(Graphics2D g2d) {
         super.paint(g2d);
-        // applying rotations
-		g2d.rotate(super.angle, super.x + super.w / 2.0, super.y + super.h / 2.0);
 		// drawing outline
 		g2d.setPaint(super.outline);
-		g2d.fillPolygon(this.xOutPoints, yOutPoints, 3);
+		g2d.fillPolygon(this.xOutPoints, this.yOutPoints, 3);
 		// drawing interior
 		g2d.setPaint(super.fill);
-		g2d.fillPolygon(this.xInnPoints, yInnPoints, 3);
+		g2d.fillPolygon(this.xInnPoints, this.yInnPoints, 3);
     }
 
     @Override
 	public void move(int dx, int dy) {
 		super.move(dx, dy);
-        this.remapPoints();
+        // out triangle
+        this.xOutPoints[0] += dx;
+        this.yOutPoints[0] += dy;
+        
+        this.xOutPoints[1] += dx;
+        this.yOutPoints[1] += dy;
+
+        this.xOutPoints[2] += dx;
+        this.yOutPoints[2] += dy;
+        // inn triangle
+        this.xInnPoints[0] += dx;
+        this.yInnPoints[0] += dy;
+        
+        this.xInnPoints[1] += dx;
+        this.yInnPoints[1] += dy;
+
+        this.xInnPoints[2] += dx;
+        this.yInnPoints[2] += dy;
 	}
 }

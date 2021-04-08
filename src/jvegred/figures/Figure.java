@@ -20,8 +20,8 @@ public abstract class Figure {
 		this.x = x; this.y = y;
 		this.w = 50; this.h = 50;
 		this.selectionRect = new Rectangle2D.Double(
-			this.x + Math.cos(this.angle) - 2.0,
-			this.y + Math.sin(this.angle) - 2.0,
+			this.x - Math.cos(this.angle) - 2.0,
+			this.y - Math.sin(this.angle) - 2.0,
 			this.w + Math.cos(this.angle) + 4.0,
 			this.h + Math.sin(this.angle) + 4.0
 		);
@@ -35,8 +35,8 @@ public abstract class Figure {
 
 	protected void updateSelectionRect() {
 		this.selectionRect.setFrame(
-			this.x + Math.cos(this.angle) - 2.0,
-			this.y + Math.sin(this.angle) - 2.0,
+			this.x - Math.cos(this.angle) - 2.0,
+			this.y - Math.sin(this.angle) - 2.0,
 			this.w + Math.cos(this.angle) + 4.0,
 			this.h + Math.sin(this.angle) + 4.0
 		);

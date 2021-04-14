@@ -19,7 +19,7 @@ public class Frame extends JFrame {
 		this.setTitle(title);
 		this.setSize(width, height);
 		
-		InputListener listener = new InputListener(this);
+		InputListener listener = new InputListener();
 		
 		this.addKeyListener(listener);
 		this.addMouseListener(listener);

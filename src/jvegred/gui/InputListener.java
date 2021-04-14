@@ -11,12 +11,8 @@ import java.awt.Color;
 import jvegred.figures.*;
 
 public class InputListener implements KeyListener, MouseInputListener {	
-	
-	private Frame parent;
 
-	public InputListener(Frame parent) {
-		this.parent = parent;
-	}
+	public InputListener() {}
 
 	// unused functions from keyListener
 	public void keyPressed(KeyEvent e) {}
@@ -29,8 +25,8 @@ public class InputListener implements KeyListener, MouseInputListener {
 
 
 	public void keyTyped(KeyEvent e) {
-		int x = MouseInfo.getPointerInfo().getLocation().x - parent.getX() - 25;
-		int y = MouseInfo.getPointerInfo().getLocation().y - parent.getY() - 25;
+		int x = MouseInfo.getPointerInfo().getLocation().x - e.getComponent().getX() - 25;
+		int y = MouseInfo.getPointerInfo().getLocation().y - e.getComponent().getY() - 25;
 		
 		switch(e.getKeyChar()) {
 			case 'e':
@@ -46,11 +42,10 @@ public class InputListener implements KeyListener, MouseInputListener {
 				FigureManager.deleteFigureOnFocus();
 				break;
 			default:
-				System.out.println(e.getKeyChar());
 				break;
 		}
 
-		parent.repaint();
+		e.getComponent().repaint();
 	}
 
 
@@ -63,9 +58,12 @@ public class InputListener implements KeyListener, MouseInputListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		System.out.format("%d %d\n", e.getXOnScreen() - this.parent.getLocation().x, + e.getYOnScreen() - this.parent.getLocation().y);	
-		FigureManager.focusFigureAt(e.getXOnScreen() - this.parent.getLocation().x, e.getYOnScreen() - this.parent.getLocation().y);
-		parent.repaint();
+		int x = e.getXOnScreen() - e.getComponent().getX();
+		int y = e.getYOnScreen() - e.getComponent().getY();
+
+		FigureManager.focusFigureAt(x, y);
+
+		e.getComponent().repaint();
 	}
 
 	public void mouseDragged(MouseEvent e) {

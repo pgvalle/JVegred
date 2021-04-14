@@ -5,7 +5,7 @@ import java.awt.Paint;
 
 public class Rectangle extends Geometric2D {
 
-    protected Rectangle(int x, int y, Paint fill, Paint outline, int outlineThickness) {
+    public Rectangle(int x, int y, Paint fill, Paint outline, int outlineThickness) {
         super(x, y, fill, outline, outlineThickness);
     }
     

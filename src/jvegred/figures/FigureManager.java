@@ -22,7 +22,7 @@ public class FigureManager {
 		// before deleting, be sure last figure is focused
 		int last = FigureManager.figures.size() - 1;
 
-		if (last >= 0) {
+		if (last >= 0 && FigureManager.figures.get(last).onFocus) {
 			FigureManager.figures.remove(last);
 		}
 	}
@@ -67,7 +67,7 @@ public class FigureManager {
 		// before moving, be sure last figure is focused
 		int last = FigureManager.figures.size() - 1;
 
-		if (last >= 0) {
+		if (last >= 0 && FigureManager.figures.get(last).onFocus) {
 			FigureManager.figures.get(last).move(dx, dy);
 		}
 	}
@@ -76,7 +76,7 @@ public class FigureManager {
 		// before resizing, be sure last figure is focused
 		int last = FigureManager.figures.size() - 1;
 
-		if (last >= 0) {
+		if (last >= 0 && FigureManager.figures.get(last).onFocus) {
 			FigureManager.figures.get(last).resize(x1, y1, x2, y2);
 		}
 	}
@@ -85,7 +85,7 @@ public class FigureManager {
 		// before spining, be sure last figure is focused
 		int last = FigureManager.figures.size() - 1;
 
-		if (last >= 0) {
+		if (last >= 0 && FigureManager.figures.get(last).onFocus) {
 			FigureManager.figures.get(last).spin(angle);
 		}
 	}

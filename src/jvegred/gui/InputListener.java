@@ -42,9 +42,11 @@ public class InputListener implements KeyListener, MouseInputListener {
 			case 't':
 				FigureManager.addFigureToList(new Triangle(x, y, Color.WHITE, Color.BLACK, 3));
 				break;
-			//case KeyEvent.VK_M:
-			//	break;
+			case 'd':
+				FigureManager.deleteFigureOnFocus();
+				break;
 			default:
+				System.out.println(e.getKeyChar());
 				break;
 		}
 

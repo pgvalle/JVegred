@@ -11,10 +11,13 @@ public class Ellipse extends Geometric2D {
     
 	@Override
 	public void paint(Graphics2D g2d) {
+		// rotate figure and draw selection rectangle case needed
 		super.paint(g2d);
+
 		// drawing outline
 		g2d.setPaint(super.outline);
 		g2d.fillOval(super.x, super.y, super.w, super.h);
+
 		// drawing interior
 		g2d.setPaint(super.fill);
 		g2d.fillOval(

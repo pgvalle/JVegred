@@ -45,10 +45,13 @@ public class Triangle extends Geometric2D {
 
     @Override
     public void paint(Graphics2D g2d) {
+		// rotate figure and draw selection rectangle case needed
         super.paint(g2d);
+
 		// drawing outline
 		g2d.setPaint(super.outline);
 		g2d.fillPolygon(this.xOutPoints, this.yOutPoints, 3);
+
 		// drawing interior
 		g2d.setPaint(super.fill);
 		g2d.fillPolygon(this.xInnPoints, this.yInnPoints, 3);
@@ -57,7 +60,8 @@ public class Triangle extends Geometric2D {
     @Override
 	public void move(int dx, int dy) {
 		super.move(dx, dy);
-        // out triangle
+        
+		// out triangle
         this.xOutPoints[0] += dx;
         this.yOutPoints[0] += dy;
         
@@ -66,6 +70,7 @@ public class Triangle extends Geometric2D {
 
         this.xOutPoints[2] += dx;
         this.yOutPoints[2] += dy;
+
         // inn triangle
         this.xInnPoints[0] += dx;
         this.yInnPoints[0] += dy;

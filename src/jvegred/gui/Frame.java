@@ -7,7 +7,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import jvegred.figures.FigureManager;
+import jvegred.figures.FigureMan;
 
 public class Frame extends JFrame {
 
@@ -19,7 +19,7 @@ public class Frame extends JFrame {
 		this.setTitle(title);
 		this.setSize(width, height);
 		
-		InputListener listener = new InputListener();
+		InputMan listener = new InputMan();
 		
 		this.addKeyListener(listener);
 		this.addMouseListener(listener);
@@ -34,6 +34,6 @@ public class Frame extends JFrame {
 		g2d.setPaint(Color.LIGHT_GRAY);
 		g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
 
-		FigureManager.paintFigures(g2d);
+		FigureMan.drawFigures(g2d);
 	}
 }

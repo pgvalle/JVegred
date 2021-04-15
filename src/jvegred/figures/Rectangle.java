@@ -5,15 +5,12 @@ import java.awt.Paint;
 
 public class Rectangle extends Geometric2D {
 
-    public Rectangle(int x, int y, Paint fill, Paint outline, int outlineThickness) {
-        super(x, y, fill, outline, outlineThickness);
+    public Rectangle(int x, int y, int w, int h, Paint fill, Paint outline, int outlineThickness) {
+        super(x, y, w, h, fill, outline, outlineThickness);
     }
-    
-    @Override
-    public void paint(Graphics2D g2d) {
-		// rotate figure and draw selection rectangle case needed
-        super.paint(g2d);
 
+	@Override
+    public void draw(Graphics2D g2d) {
 		// drawing outline
 		g2d.setPaint(super.outline);
 		g2d.fillRect(super.x, super.y, super.w, super.h);

@@ -9,15 +9,17 @@ public abstract class Figure {
 
 	protected int x, y;
 	protected int w, h;
-	
+
 	protected Paint fill;
 
 	protected Figure(int x, int y, int w, int h, Paint fill) {
 		this.focused = true;
 
-		this.x = x; this.y = y;
-		this.w = w; this.h = h;
-		
+		this.x = x;
+		this.y = y;
+		this.w = w;
+		this.h = h;
+
 		this.fill = fill;
 	}
 
@@ -30,7 +32,7 @@ public abstract class Figure {
 
 	public abstract void draw(Graphics2D g2d);
 
-	public void move(int dx, int dy) {
+	public void drag(int dx, int dy) {
 		this.x += dx;
 		this.y += dy;
 	}

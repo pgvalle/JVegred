@@ -24,10 +24,7 @@ public abstract class Figure {
 	}
 
 	public boolean contains(int x, int y) {
-		boolean inx = this.x <= x && x <= this.x + this.w;
-		boolean iny = this.y <= y && y <= this.y + this.h;
-
-		return inx && iny;
+		return this.x <= x && x <= this.x + this.w && this.y <= y && y <= this.y + this.h;
 	}
 
 	public abstract void draw(Graphics2D g2d);

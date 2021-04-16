@@ -12,10 +12,12 @@ import jvegred.figures.FigureMan;
 public class Frame extends JFrame {
 
 	public Frame(String title, int width, int height) {
+		// really basic setup
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setTitle(title);
 		this.setSize(width, height);
 		
+		// adding listener properly
 		InputMan listener = new InputMan();
 		
 		this.addKeyListener(listener);
@@ -27,7 +29,7 @@ public class Frame extends JFrame {
 	public void paint(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 
-		// repainting background (necessary to focus feature to work)
+		// repainting background is necessary to focus feature to work
 		g2d.setPaint(Color.LIGHT_GRAY);
 		g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
 

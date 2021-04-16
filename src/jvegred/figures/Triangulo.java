@@ -3,16 +3,18 @@ package jvegred.figures;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 
-public class Triangle extends Geometric2D {
+public class Triangulo extends Geometric2D {
 
-    protected int[] xOutPoints, yOutPoints;
-    protected int[] xInnPoints, yInnPoints;
+    private int[] xOutPoints, yOutPoints;
+    private int[] xInnPoints, yInnPoints;
 
-    public Triangle(int x, int y, int w, int h, Paint fill, Paint outline, int outlineThickness) {
+    public Triangulo(int x, int y, int w, int h, Paint fill, Paint outline, int outlineThickness) {
         super(x, y, w, h, fill, outline, outlineThickness);
-        
-        this.xOutPoints = new int[3]; this.yOutPoints = new int[3];
-        this.xInnPoints = new int[3]; this.yInnPoints = new int[3];
+
+        this.xOutPoints = new int[3];
+        this.yOutPoints = new int[3];
+        this.xInnPoints = new int[3];
+        this.yInnPoints = new int[3];
 
         this.remapPoints();
     }
@@ -21,7 +23,7 @@ public class Triangle extends Geometric2D {
         // outline points
         this.xOutPoints[0] = this.x + this.w / 2;
         this.yOutPoints[0] = this.y;
-        
+
         this.xOutPoints[1] = this.x + this.w;
         this.yOutPoints[1] = this.y + this.h;
 
@@ -35,7 +37,7 @@ public class Triangle extends Geometric2D {
 
         this.xInnPoints[0] = this.x + this.w / 2;
         this.yInnPoints[0] = this.y + dy;
-        
+
         this.xInnPoints[1] = this.x + this.w - dx;
         this.yInnPoints[1] = this.y + this.h - this.outlineThickness;
 
@@ -45,23 +47,23 @@ public class Triangle extends Geometric2D {
 
     @Override
     public void draw(Graphics2D g2d) {
-		// drawing outline
-		g2d.setPaint(super.outline);
-		g2d.fillPolygon(this.xOutPoints, this.yOutPoints, 3);
+        // drawing outline
+        g2d.setPaint(super.outline);
+        g2d.fillPolygon(this.xOutPoints, this.yOutPoints, 3);
 
-		// drawing interior
-		g2d.setPaint(super.fill);
-		g2d.fillPolygon(this.xInnPoints, this.yInnPoints, 3);
+        // drawing interior
+        g2d.setPaint(super.fill);
+        g2d.fillPolygon(this.xInnPoints, this.yInnPoints, 3);
     }
 
     @Override
-	public void move(int dx, int dy) {
-		super.move(dx, dy);
-        
-		// out triangle
+    public void drag(int dx, int dy) {
+        super.drag(dx, dy);
+
+        // out triangle
         this.xOutPoints[0] += dx;
         this.yOutPoints[0] += dy;
-        
+
         this.xOutPoints[1] += dx;
         this.yOutPoints[1] += dy;
 
@@ -71,11 +73,11 @@ public class Triangle extends Geometric2D {
         // inn triangle
         this.xInnPoints[0] += dx;
         this.yInnPoints[0] += dy;
-        
+
         this.xInnPoints[1] += dx;
         this.yInnPoints[1] += dy;
 
         this.xInnPoints[2] += dx;
         this.yInnPoints[2] += dy;
-	}
+    }
 }

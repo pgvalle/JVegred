@@ -11,9 +11,6 @@ import jvegred.figures.FigureMan;
 
 public class Frame extends JFrame {
 
-	// só pro vscode parar de reclamar
-	private static final long serialVersionUID = 1L;
-
 	public Frame(String title, int width, int height) {
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setTitle(title);

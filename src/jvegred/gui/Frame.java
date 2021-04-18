@@ -30,7 +30,7 @@ public class Frame extends JFrame {
 		Graphics2D g2d = (Graphics2D) g;
 
 		// repainting background is necessary to focus feature to work
-		g2d.setPaint(Color.BLACK);
+		g2d.setPaint(Color.LIGHT_GRAY);
 		g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
 
 		FigureMan.drawFigures(g2d);

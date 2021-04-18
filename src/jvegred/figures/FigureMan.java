@@ -81,7 +81,7 @@ public class FigureMan {
 		// found a figure that contains (x, y)
 		if (findex != -1) {
 			Figure f = FigureMan.figures.get(findex);
-			
+
 			f.focused = true;
 			// insert selected figure in the end
 			FigureMan.figures.remove(findex);

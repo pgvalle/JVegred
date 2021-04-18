@@ -1,5 +1,9 @@
 <project name="JVegred" basedir="." default="main">
 
+	<presetdef name="javac">
+		<javac includeantruntime="false" />
+	</presetdef>
+
     <property name="src.dir"     value="src"/>
 
     <property name="build.dir"   value="build"/>

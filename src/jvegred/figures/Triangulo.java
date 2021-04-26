@@ -1,7 +1,6 @@
 package jvegred.figures;
 
-import java.awt.Graphics2D;
-import java.awt.Paint;
+import java.awt.*;
 
 public class Triangulo extends Geometric2D {
 
@@ -46,7 +45,7 @@ public class Triangulo extends Geometric2D {
     }
 
     @Override
-    public void draw(Graphics2D g2d) {
+    public void paint(Graphics2D g2d) {
         // drawing outline
         g2d.setPaint(super.outline);
         g2d.fillPolygon(this.xOutPoints, this.yOutPoints, 3);
@@ -79,5 +78,11 @@ public class Triangulo extends Geometric2D {
 
         this.xInnPoints[2] += dx;
         this.yInnPoints[2] += dy;
+    }
+    
+    @Override
+    public void resize(int dx, int dy, int dw, int dh) {
+        super.resize(dx, dy, dw, dh);
+        this.remapPoints();
     }
 }

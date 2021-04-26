@@ -1,10 +1,7 @@
 package jvegred.figures;
 
-import java.awt.Graphics2D;
-import java.awt.Paint;
-import java.awt.Font;
-import java.awt.font.FontRenderContext;
-import java.awt.font.LineMetrics;
+import java.awt.*;
+import java.awt.font.*;
 
 // TODO Finish implementing Texto class
 public class Texto extends Figure {
@@ -18,7 +15,7 @@ public class Texto extends Figure {
     }
 
     @Override
-    public void draw(Graphics2D g2d) {
+    public void paint(Graphics2D g2d) {
         // TODO Implement Texto.draw
 
         Font font = g2d.getFont();

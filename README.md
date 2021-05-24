@@ -7,6 +7,7 @@ execute o comando "ant run" e o programa vai compilar e executar.
 ### 2) Sem apache ant
 ir ao diretorio src e executar o comando
 javac src/JVegredApp.java (compila)
+
 java src.JVegredApp (executa)
 ## Como usar
 e - nova elipse.

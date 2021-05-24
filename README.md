@@ -20,7 +20,7 @@ s - novo texto.
 
 delete - deleta figuras em foco
 
-control + r - liga / desliga o modo resize.
+control + r - liga / desliga o modo resize. (padrão desligado)
 
 Com o modo resize desligado o usuario move as figuras. Caso contrário o usuário redimensiona a figura.
 OBS: caso o modo resize esteja desligado, é necessário selecionar a figura primeiro para depois move-la arrastando com o mouse.

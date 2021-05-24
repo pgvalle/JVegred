@@ -17,6 +17,8 @@ r - novo retangulo.
 
 s - novo texto.
 
+delete - deleta figuras em foco
+
 control + r - liga / desliga o modo resize.
 
 Com o modo resize desligado o usuario move as figuras. Caso contrário o usuário redimensiona a figura.

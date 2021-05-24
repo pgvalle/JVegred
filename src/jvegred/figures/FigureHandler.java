@@ -107,6 +107,7 @@ public class FigureHandler {
     
     public static void paintFigures(Graphics2D g2d) {
         int lx = Integer.MAX_VALUE, ly = Integer.MAX_VALUE, gx = 0, gy = 0;
+        boolean ok = false;
         
         for (Figure f : figures) {
             if (f.onFocus) {
@@ -117,13 +118,16 @@ public class FigureHandler {
                 
                 g2d.setPaint(Color.RED);
                 g2d.drawRect(f.x, f.y, f.w, f.h);
+                ok = true;
             }
             
             f.paint(g2d);
         }
         
-        g2d.setPaint(Color.RED);
-        g2d.drawRect(lx, ly, gx - lx, gy - ly);
+        if (ok) {
+            g2d.setPaint(Color.RED);
+            g2d.drawRect(lx, ly, gx - lx, gy - ly);
+        }
 
         g2d.setPaint(fill);
         g2d.fillRect(0, 0, 20, 20);

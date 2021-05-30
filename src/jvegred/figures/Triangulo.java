@@ -2,12 +2,12 @@ package jvegred.figures;
 
 import java.awt.*;
 
-public class Triangulo extends Geometric2D {
+public class Triangulo extends Figure {
 
     private int[] xOutPoints, yOutPoints;
     private int[] xInnPoints, yInnPoints;
 
-    public Triangulo(int x, int y, int w, int h, Paint fill, Paint outline, int outlineThickness) {
+    public Triangulo(int x, int y, int w, int h, Color fill, Color outline, int outlineThickness) {
         super(x, y, w, h, fill, outline, outlineThickness);
 
         this.xOutPoints = new int[3];
@@ -18,7 +18,7 @@ public class Triangulo extends Geometric2D {
         this.remapPoints();
     }
 
-    private void remapPoints() {
+    public void remapPoints() {
         // outline points
         this.xOutPoints[0] = this.x + this.w / 2;
         this.yOutPoints[0] = this.y;
@@ -45,7 +45,7 @@ public class Triangulo extends Geometric2D {
     }
 
     @Override
-    public void paint(Graphics2D g2d) {
+    public void paint(Graphics2D g2d, boolean hasfocus) {
         // drawing outline
         g2d.setPaint(super.outline);
         g2d.fillPolygon(this.xOutPoints, this.yOutPoints, 3);
@@ -53,36 +53,35 @@ public class Triangulo extends Geometric2D {
         // drawing interior
         g2d.setPaint(super.fill);
         g2d.fillPolygon(this.xInnPoints, this.yInnPoints, 3);
+
+        if (hasfocus) {
+            g2d.setColor(Color.RED);
+            g2d.drawRect(super.x, super.y, super.w, super.h);
+        }
+    }
+
+    @Override
+    public Figure clone() {
+        return new Triangulo(x, y, w, h, fill, outline, outlineThickness);
     }
 
     @Override
     public void drag(int dx, int dy) {
         super.drag(dx, dy);
 
-        // out triangle
-        this.xOutPoints[0] += dx;
-        this.yOutPoints[0] += dy;
-
-        this.xOutPoints[1] += dx;
-        this.yOutPoints[1] += dy;
-
-        this.xOutPoints[2] += dx;
-        this.yOutPoints[2] += dy;
-
-        // inn triangle
-        this.xInnPoints[0] += dx;
-        this.yInnPoints[0] += dy;
-
-        this.xInnPoints[1] += dx;
-        this.yInnPoints[1] += dy;
-
-        this.xInnPoints[2] += dx;
-        this.yInnPoints[2] += dy;
+        for (int i = 0; i < 3; i++) {
+            // out triangle
+            this.xOutPoints[i] += dx;
+            this.yOutPoints[i] += dy;
+            // inn triangle
+            this.xInnPoints[i] += dx;
+            this.yInnPoints[i] += dy;
+        }
     }
     
     @Override
-    public void resize(int dx, int dy, int dw, int dh) {
-        super.resize(dx, dy, dw, dh);
+    public void resize(int x1, int y1, int dx, int dy) {
+        super.resize(x1, y1, dx, dy);
         this.remapPoints();
     }
 }

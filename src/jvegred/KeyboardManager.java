@@ -26,7 +26,9 @@ class KeyboardManager extends KeyAdapter {
         
         if (!controlActions(x, y, keyCode)) {
             if (CanvasManager.createFigure(x, y, keyChar));
-            else if (keyChar == 'f') {
+            else if (keyCode == KeyEvent.VK_DELETE) {
+                CanvasManager.deleteFigures();
+            } else if (keyChar == 'f') {
                 CanvasManager.propertyChangeType = 0;
             } else if (keyChar == 'o') {
                 CanvasManager.propertyChangeType = 1;

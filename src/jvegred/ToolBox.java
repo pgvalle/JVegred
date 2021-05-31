@@ -19,25 +19,25 @@ public class ToolBox {
 
         fbuttons[0] = new Button(
             new Elipse(TB_X + offset, TB_Y + offset,
-            F_SIZE, F_SIZE, Color.BLACK, Color.WHITE, 2),
+            F_SIZE, F_SIZE, Color.WHITE, Color.BLACK, 2),
                 'e'
         );
 
         fbuttons[1] = new Button(
             new Retangulo(TB_X + B_SIZE + offset, TB_Y + offset,
-            F_SIZE, F_SIZE, Color.BLACK, Color.WHITE, 2),
+            F_SIZE, F_SIZE, Color.WHITE, Color.BLACK, 2),
                 'r'
         );
 
         fbuttons[2] = new Button(
             new Triangulo(TB_X + 2*B_SIZE + offset, TB_Y + offset,
-            F_SIZE, F_SIZE, Color.BLACK, Color.WHITE, 2),
+            F_SIZE, F_SIZE, Color.WHITE, Color.BLACK, 2),
                 't'
         );
 
         fbuttons[3] = new Button(
             new Hexagono(TB_X + 3*B_SIZE + offset, TB_Y + offset,
-            F_SIZE, F_SIZE, Color.BLACK, Color.WHITE, 2),
+            F_SIZE, F_SIZE, Color.WHITE, Color.BLACK, 2),
                 'h'
         );
 

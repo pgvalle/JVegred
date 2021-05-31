@@ -1,11 +1,11 @@
 # JVegred
-## como compilar e executar
-### 1) Usando apache ant
+## Como compilar e executar
+#### 1) Usando apache ant
 va ao diretório raiz e
 execute o comando "ant run" e o programa vai compilar e executar.
 
 "ant jar" compila e empacota o programa em um .jar no diretório raiz.
-### 2) Sem apache ant
+#### 2) Sem apache ant
 ir ao diretorio src e executar o comando
 "javac src/JVegredApp.java" compila o programa
 
@@ -32,7 +32,7 @@ p - selecionar grossura de contorno
 
 o - selecionar cor do contorno
 
-### Novidades
+#### Novidades
 h - novo hexágono.
 
 control + s - Salva o estado atual do canvas no arquivo canvas.bin no diretório de execução.

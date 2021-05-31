@@ -33,21 +33,19 @@ public class Hexagono extends Figure {
         this.xOutPoints[5] = super.x;
         this.yOutPoints[5] = super.y + super.h / 2;
 
-        int dx = (int) (Math.cos(Math.PI / 6) / this.outlineThickness);
-
         // outline points
-        this.xInnPoints[0] = super.x + super.w / 4 + dx;
-        this.yInnPoints[0] = super.y + super.outlineThickness; // ok
-        this.xInnPoints[1] = super.x + 3*super.w / 4 - dx;
-        this.yInnPoints[1] = super.y + super.outlineThickness; // ok
-        this.xInnPoints[2] = super.x + super.w - super.outlineThickness; // ok
-        this.yInnPoints[2] = super.y + super.h / 2; // ok
-        this.xInnPoints[3] = super.x + 3*super.w / 4 - dx;
-        this.yInnPoints[3] = super.y + super.h - super.outlineThickness; // ok
-        this.xInnPoints[4] = super.x + super.w / 4 + dx;
-        this.yInnPoints[4] = super.y + super.h - super.outlineThickness; // ok
-        this.xInnPoints[5] = super.x + super.outlineThickness; // ok
-        this.yInnPoints[5] = super.y + super.h / 2; // ok
+        this.xInnPoints[0] = super.x + super.w / 4;
+        this.yOutPoints[0] = super.y + super.outlineThickness;
+        this.xInnPoints[1] = super.x + 3*super.w / 4;
+        this.yOutPoints[1] = super.y + super.outlineThickness;
+        this.xInnPoints[2] = super.x + super.w;
+        this.yOutPoints[2] = super.y + super.h / 2;
+        this.xInnPoints[3] = super.x + 3*super.w / 4;
+        this.yOutPoints[3] = super.y + super.h - super.outlineThickness;
+        this.xInnPoints[4] = super.x + super.w / 4;
+        this.yOutPoints[4] = super.y + super.h - super.outlineThickness;
+        this.xInnPoints[5] = super.x;
+        this.yOutPoints[5] = super.y + super.h / 2;
     }
 
     @Override

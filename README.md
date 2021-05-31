@@ -32,12 +32,12 @@ p - selecionar grossura de contorno
 
 o - selecionar cor do contorno
 
-## Novidades
+### Novidades
 h - novo hexágono.
 
-control + s - Salva o estado atual do canvas no arquivo root_dir/canvas.bin.
+control + s - Salva o estado atual do canvas no arquivo canvas.bin no diretório de execução.
 
-control + o - Lê o o arquivo root_dir/canvas.bin e restaura o estado do canvas.
+control + o - Lê o o arquivo canvas.bin do diretório de execução e restaura o estado do canvas.
 
 control + c - Copia a seleção atual de figuras.
 

@@ -3,7 +3,7 @@ package jvegred;
 import java.awt.*;
 import java.awt.event.*;
 
-public class MouseManager extends MouseAdapter implements MouseWheelListener {
+public class MouseManager extends MouseAdapter {
 
     private Color[] colors = {Color.BLACK, Color.BLUE, Color.CYAN, Color.DARK_GRAY,
         Color.GRAY, Color.GREEN, Color.LIGHT_GRAY, Color.MAGENTA, Color.ORANGE,

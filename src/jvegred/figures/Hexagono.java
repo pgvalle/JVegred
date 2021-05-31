@@ -35,17 +35,17 @@ public class Hexagono extends Figure {
 
         // outline points
         this.xInnPoints[0] = super.x + super.w / 4;
-        this.yOutPoints[0] = super.y + super.outlineThickness;
+        this.yInnPoints[0] = super.y + super.outlineThickness;
         this.xInnPoints[1] = super.x + 3*super.w / 4;
-        this.yOutPoints[1] = super.y + super.outlineThickness;
+        this.yInnPoints[1] = super.y + super.outlineThickness;
         this.xInnPoints[2] = super.x + super.w;
-        this.yOutPoints[2] = super.y + super.h / 2;
+        this.yInnPoints[2] = super.y + super.h / 2;
         this.xInnPoints[3] = super.x + 3*super.w / 4;
-        this.yOutPoints[3] = super.y + super.h - super.outlineThickness;
+        this.yInnPoints[3] = super.y + super.h - super.outlineThickness;
         this.xInnPoints[4] = super.x + super.w / 4;
-        this.yOutPoints[4] = super.y + super.h - super.outlineThickness;
+        this.yInnPoints[4] = super.y + super.h - super.outlineThickness;
         this.xInnPoints[5] = super.x;
-        this.yOutPoints[5] = super.y + super.h / 2;
+        this.yInnPoints[5] = super.y + super.h / 2;
     }
 
     @Override

@@ -25,8 +25,10 @@ public abstract class Figure implements Serializable {
     }
 
     public void drag(int dx, int dy) {
+        // moving left and right
         this.x1 += dx;
         this.x2 += dx;
+        // moving top and bottom
         this.y1 += dy;
         this.y2 += dy;
     }

@@ -5,49 +5,49 @@ import java.io.Serializable;
 
 public abstract class Figure implements Serializable {
 
-    public int x, y;
-    public int w, h;
-    public Color fill;
-    public Color outline;
-    public int outlineThickness;
+    public int x1, x2;
+    public int y1, y2;
     
-    protected Figure(int x, int y, int w, int h, Color fill, Color outline, int outlineThickness) {
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
-        this.fill = fill;
-        this.outline = outline;
-        this.outlineThickness = outlineThickness;
+    protected Figure(int x, int y, int w, int h) {
+        this.x1 = x;     // left
+        this.x2 = x + w; // right
+        this.y1 = y;     // top
+        this.y2 = y + h; // bottom
     }
 
-    public abstract Figure clone();
+    public abstract Figure copy();
 
-    public abstract void paint(Graphics2D g2d, boolean hasfocus);
+    public abstract void paint(Graphics2D g2d);
+    public abstract void paintFocused(Graphics2D g2d);
 
-    public boolean click(int x, int y) {
-        return this.x <= x && x <= this.x + this.w &&
-            this.y <= y && y <= this.y + this.h;
+    public boolean inBounds(int x, int y) {
+        return this.x1 <= x && x <= this.x2 && this.y1 <= y && y <= this.y2;
     }
 
     public void drag(int dx, int dy) {
-        this.x += dx;
-        this.y += dy;
+        this.x1 += dx;
+        this.x2 += dx;
+        this.y1 += dy;
+        this.y2 += dy;
     }
     
-    public void resize(int x1, int y1, int dx, int dy) {
-        if (x1 - this.x < this.x + this.w - x1) {
-            this.x += dx;
-            this.w -= dx;
-        } else if (this.x + this.w - x1 < x1 - this.x) {
-            this.w += dx;
+    public void resize(int x, int y, int dx, int dy) {
+        // resizing horizontally
+        int distanceToLeft = Math.abs(x - this.x1);
+        int distanceToRight = Math.abs(x - this.x2);
+        if (distanceToLeft < distanceToRight) {
+            this.x1 += dx;
+        } else {
+            this.x2 += dx;
         }
 
-        if (y1 - this.y < this.y + this.h - y1) {
-            this.y += dy;
-            this.h -= dy;
-        } else if (this.y + this.h - y1 < y1 - this.y) {
-            this.h += dy;
+        // resizing vertically
+        int distanceToTop = Math.abs(y - this.y1);
+        int distanceToBottom = Math.abs(y - this.y2);
+        if (distanceToTop < distanceToBottom) {
+            this.y1 += dy;
+        } else {
+            this.y2 += dy;
         }
     }
 }

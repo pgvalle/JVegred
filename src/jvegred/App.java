@@ -6,14 +6,14 @@ import javax.swing.*;
 public class App extends JFrame {
 
     public static void main(String[] args) {
-        App app = new App();
-        app.setVisible(true);
+        new App();
     }
 
     public App() {
         super.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         super.setTitle("JVegred");
         super.setSize(500, 500);
+        super.setVisible(true);
     }
 
     @Override

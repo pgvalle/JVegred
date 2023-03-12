@@ -1,4 +1,4 @@
-package figures;
+package jvegred.figures;
 
 import java.awt.*;
 
@@ -8,14 +8,24 @@ public class Line extends Figure {
     public int thickness;
 
     public Line(int x1, int y1, int x2, int y2) {
-        final int w = Math.abs(x2 - x1);
-        final int h = Math.abs(y2 - y1);
-
-        super(x1, y1, w, h);
+        super(x1, y1, x2 - x1, y2 - y1);
         this.color = Color.BLACK;
         this.thickness = 1;
     }
 
+    @Override
+    public Figure copy() {
+        final int w = super.x2 - super.x1;
+        final int h = super.y2 - super.y1;
+
+        Line line = new Line(this.x1, this.y1, w, h);
+        line.color = this.color;
+        line.thickness = this.thickness;
+
+        return line;
+    }
+
+    @Override
     public void paint(Graphics2D g2d) {
         g2d.setPaint(this.color);
         g2d.setStroke(new BasicStroke(this.thickness));

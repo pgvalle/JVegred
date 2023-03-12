@@ -2,7 +2,7 @@ package jvegred.figures;
 
 import java.awt.*;
 
-public class Hexagon extends Figure {
+public class Hexagon extends Rectangl {
 
     private int[] xOutPoints, yOutPoints;
     private int[] xInPoints, yInPoints;
@@ -19,6 +19,9 @@ public class Hexagon extends Figure {
     }
 
     public void remapPoints() {
+        int w = super.x2 - super.x1;
+        int h = super.y2 - super.y1;
+
         // outline points
         this.xOutPoints[0] = super.x1 + w / 4;
         this.yOutPoints[0] = super.y1;
@@ -53,10 +56,10 @@ public class Hexagon extends Figure {
         int w = super.x2 - super.x1;
         int h = super.y2 - super.y1;
         Hexagon hexa = new Hexagon(super.x1, super.y1, w, h);
-        System.arraycopy(this.xOutPoints, 0, tria.xOutPoints, 0, 6);
-        System.arraycopy(this.yOutPoints, 0, tria.yOutPoints, 0, 6);
-        System.arraycopy(this.xInPoints, 0, tria.xInPoints, 0, 6);
-        System.arraycopy(this.yInPoints, 0, tria.yInPoints, 0, 6);
+        System.arraycopy(this.xOutPoints, 0, hexa.xOutPoints, 0, 6);
+        System.arraycopy(this.yOutPoints, 0, hexa.yOutPoints, 0, 6);
+        System.arraycopy(this.xInPoints, 0, hexa.xInPoints, 0, 6);
+        System.arraycopy(this.yInPoints, 0, hexa.yInPoints, 0, 6);
 
         return hexa;
     }

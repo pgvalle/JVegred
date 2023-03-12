@@ -1,80 +1,118 @@
 package jvegred;
 
 import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 import jvegred.figures.*;
 
-public class ToolBox {
+class Button {
 
-    public static final int B_SIZE = 32;
-    public static final int F_SIZE = 24;
-    public static final int TB_X = 10, TB_Y = 35;
+    public static final int SIZE = 32;
+    public static final int FIGURE_SIZE = 24;
+    // public static final int this.x = 10, this.y = 35;
     
-    public static Button[] fbuttons = new Button[4];
+    private Figure figure;
 
-    public static int focused;
-
-    public static void initButtons() {
-        int offset = (B_SIZE-F_SIZE) / 2;
-
-        fbuttons[0] = new Button(
-            new Elipse(TB_X + offset, TB_Y + offset,
-            F_SIZE, F_SIZE, Color.WHITE, Color.BLACK, 2),
-                'e'
-        );
-
-        fbuttons[1] = new Button(
-            new Retangulo(TB_X + B_SIZE + offset, TB_Y + offset,
-            F_SIZE, F_SIZE, Color.WHITE, Color.BLACK, 2),
-                'r'
-        );
-
-        fbuttons[2] = new Button(
-            new Triangulo(TB_X + 2*B_SIZE + offset, TB_Y + offset,
-            F_SIZE, F_SIZE, Color.WHITE, Color.BLACK, 2),
-                't'
-        );
-
-        fbuttons[3] = new Button(
-            new Hexagono(TB_X + 3*B_SIZE + offset, TB_Y + offset,
-            F_SIZE, F_SIZE, Color.WHITE, Color.BLACK, 2),
-                'h'
-        );
-
-        focused = -1;
+    public Button(Figure figure) {
+        this.figure = figure;
     }
 
-    public static void paintButtons(Graphics2D g2d) {
+    public void paint(Graphics2D g2d) {    
+        this.figure.paint(g2d);
+    }
+
+    public void paintFocused(Graphics2D g2d) {
+        g2d.setColor(Color.RED);
+        g2d.drawRect(this.figure.x1, this.figure.y1, SIZE, SIZE);
+
+        this.paint(g2d);
+    }
+
+    public void paintSelected(Graphics2D g2d) {
+        g2d.setColor(Color.BLACK);
+        g2d.drawRect(this.figure.x1, this.figure.y1, SIZE, SIZE);
+
+        this.paint(g2d);
+    }
+}
+
+public class ToolBox implements MouseListener, MouseMotionListener {
+    
+    public int x, y;
+    public Button[] buttons;
+    public int focused, selected;
+
+    ToolBox(int x, int y) {
+        int offset = (Button.SIZE - Button.FIGURE_SIZE) / 2;
+
+        this.x = x;
+        this.y = y;
+        this.buttons = new Button[4];
+
+        buttons[0] = new Button(new Elipse(this.x + offset, this.y + offset,
+            Button.FIGURE_SIZE, Button.FIGURE_SIZE));
+        buttons[1] = new Button(new Rectangl(this.x + offset + Button.SIZE,
+            this.y + offset, Button.FIGURE_SIZE, Button.FIGURE_SIZE));
+        buttons[2] = new Button(new Triangle(this.x + offset + 2*Button.SIZE,
+            this.y + offset, Button.FIGURE_SIZE, Button.FIGURE_SIZE));
+        buttons[3] = new Button(new Hexagon(this.x + offset + 3*Button.SIZE,
+            this.y + offset, Button.FIGURE_SIZE, Button.FIGURE_SIZE));
+
+        this.focused = this.selected = -1;
+    }
+
+    public void paint(Graphics2D g2d) {
+        // toolbox background
         g2d.setColor(Color.GRAY);
-        g2d.fillRect(TB_X, TB_Y, 4*B_SIZE, B_SIZE);
-
-        if (focused > -1) {
-            g2d.setColor(Color.DARK_GRAY);
-            g2d.fillRect(TB_X + focused*B_SIZE, TB_Y, B_SIZE, B_SIZE);
-            g2d.setColor(Color.RED);
-            g2d.drawRect(TB_X + focused*B_SIZE, TB_Y, B_SIZE, B_SIZE);
-        }
+        g2d.fillRect(this.x, this.y, 4*Button.SIZE, Button.SIZE);
         
-        for (Button b : fbuttons) b.innerfig.paint(g2d, false);
-    }
-
-    public static boolean clickFigureButton(int x, int y) {
-        for (int i = 0; i < fbuttons.length; i++) {
-            boolean inX = x > TB_X + i*B_SIZE && x < TB_X + (i+1)*B_SIZE;
-            boolean inY = y > TB_Y && y < TB_Y + B_SIZE;
-
-            if (inX && inY) {
-                focused = (focused == i ? -1 : i);
-                return true;
-            }
+        // painting inative buttons
+        for (int i = 0; i < this.buttons.length; i++) {
+            if (i != this.focused && i != this.selected)
+                this.buttons[i].paint(g2d);
         }
 
-        focused = -1;
-        return false;
+        // button which mouse is over it
+        if (this.focused != -1)
+            this.buttons[this.focused].paintFocused(g2d);
+        // current figure type selected
+        if (this.selected != -1)
+            this.buttons[this.selected].paintSelected(g2d);
     }
 
-    public static char getFigureType() {
-        if (focused == -1) return '\n';
-        return fbuttons[focused].ftype;
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        
     }
 }

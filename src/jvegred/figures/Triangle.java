@@ -2,7 +2,7 @@ package jvegred.figures;
 
 import java.awt.*;
 
-public class Triangle extends Retangulo {
+public class Triangle extends Rectangl {
 
     private int[] xOutPoints, yOutPoints;
     private int[] xInPoints, yInPoints;

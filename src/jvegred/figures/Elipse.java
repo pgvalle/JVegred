@@ -2,7 +2,7 @@ package jvegred.figures;
 
 import java.awt.*;
 
-public class Elipse extends Rectangle {
+public class Elipse extends Rectangl {
 
     public Elipse(int x, int y, int w, int h) {
         super(x, y, w, h);

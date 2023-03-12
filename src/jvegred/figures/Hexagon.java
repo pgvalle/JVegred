@@ -19,8 +19,8 @@ public class Hexagon extends Rectangl {
     }
 
     public void remapPoints() {
-        int w = super.x2 - super.x1;
-        int h = super.y2 - super.y1;
+        final int w = super.x2 - super.x1;
+        final int h = super.y2 - super.y1;
 
         // outline points
         this.xOutPoints[0] = super.x1 + w / 4;
@@ -52,9 +52,10 @@ public class Hexagon extends Rectangl {
     }
 
     @Override
-    public Figure clone() {
-        int w = super.x2 - super.x1;
-        int h = super.y2 - super.y1;
+    public Figure copy() {
+        final int w = super.x2 - super.x1;
+        final int h = super.y2 - super.y1;
+        
         Hexagon hexa = new Hexagon(super.x1, super.y1, w, h);
         System.arraycopy(this.xOutPoints, 0, hexa.xOutPoints, 0, 6);
         System.arraycopy(this.yOutPoints, 0, hexa.yOutPoints, 0, 6);

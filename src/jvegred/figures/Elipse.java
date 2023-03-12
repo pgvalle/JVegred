@@ -10,8 +10,8 @@ public class Elipse extends Rectangl {
 
     @Override
     public void paint(Graphics2D g2d) {
-        int w = super.x2 - super.x1;
-        int h = super.y2 - super.y1;
+        final int w = super.x2 - super.x1;
+        final int h = super.y2 - super.y1;
 
         // drawing outline
         g2d.setPaint(super.outline);
@@ -19,9 +19,7 @@ public class Elipse extends Rectangl {
 
         // drawing interior
         g2d.setPaint(super.fill);
-        g2d.fillOval(
-            super.x1 + super.outlineThickness, super.y1 + super.outlineThickness,
-            w - 2*super.outlineThickness, h - 2*super.outlineThickness
-        );
+        g2d.fillOval(super.x1 + super.outlineThickness, super.y1 + super.outlineThickness,
+            w - 2*super.outlineThickness, h - 2*super.outlineThickness);
     }
 }

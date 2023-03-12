@@ -18,10 +18,14 @@ public abstract class Figure implements Serializable {
     public abstract Figure copy();
 
     public abstract void paint(Graphics2D g2d);
-    public abstract void paintFocused(Graphics2D g2d);
 
-    public boolean inBounds(int x, int y) {
-        return this.x1 <= x && x <= this.x2 && this.y1 <= y && y <= this.y2;
+    public void paintFocus(Graphics2D g2d) {
+        final int w = this.x2 - this.x1;
+        final int h = this.y2 - this.y1;
+
+        // focus Rectangle
+        g2d.setColor(Color.RED);
+        g2d.drawRect(this.x1, this.y1, w, h);
     }
 
     public void drag(int dx, int dy) {
@@ -35,8 +39,8 @@ public abstract class Figure implements Serializable {
     
     public void resize(int x, int y, int dx, int dy) {
         // resizing horizontally
-        int distanceToLeft = Math.abs(x - this.x1);
-        int distanceToRight = Math.abs(x - this.x2);
+        final int distanceToLeft = Math.abs(x - this.x1);
+        final int distanceToRight = Math.abs(x - this.x2);
         if (distanceToLeft < distanceToRight) {
             this.x1 += dx;
         } else {
@@ -44,8 +48,8 @@ public abstract class Figure implements Serializable {
         }
 
         // resizing vertically
-        int distanceToTop = Math.abs(y - this.y1);
-        int distanceToBottom = Math.abs(y - this.y2);
+        final int distanceToTop = Math.abs(y - this.y1);
+        final int distanceToBottom = Math.abs(y - this.y2);
         if (distanceToTop < distanceToBottom) {
             this.y1 += dy;
         } else {

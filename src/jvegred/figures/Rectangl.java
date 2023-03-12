@@ -20,8 +20,8 @@ public class Rectangl extends Figure {
 
     @Override
     public Figure copy() {
-        int w = super.x2 - super.x1;
-        int h = super.y2 - super.y1;
+        final int w = super.x2 - super.x1;
+        final int h = super.y2 - super.y1;
         
         Rectangl rect = new Rectangl(this.x1, this.y1, w, h);
         rect.fill = this.fill;
@@ -33,8 +33,8 @@ public class Rectangl extends Figure {
 
     @Override
     public void paint(Graphics2D g2d) {
-        int w = super.x2 - super.x1;
-        int h = super.y2 - super.y1;
+        final int w = super.x2 - super.x1;
+        final int h = super.y2 - super.y1;
         
         // drawing outline
         g2d.setPaint(this.outline);
@@ -42,21 +42,7 @@ public class Rectangl extends Figure {
 
         // drawing interior
         g2d.setPaint(this.fill);
-        g2d.fillRect(
-            super.x1 + this.outlineThickness, super.y1 + this.outlineThickness,
-            w - 2*this.outlineThickness, h - 2*this.outlineThickness
-        );
-    }
-
-    @Override
-    public void paintFocused(Graphics2D g2d) {
-        int w = super.x2 - super.x1;
-        int h = super.y2 - super.y1;
-
-        // focus Rectangl
-        g2d.setColor(Color.RED);
-        g2d.drawRect(super.x1, super.y1, w, h);
-
-        this.paint(g2d);
+        g2d.fillRect(super.x1 + this.outlineThickness, super.y1 + this.outlineThickness,
+            w - 2*this.outlineThickness, h - 2*this.outlineThickness);
     }
 }

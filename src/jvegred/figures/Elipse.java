@@ -2,33 +2,26 @@ package jvegred.figures;
 
 import java.awt.*;
 
-public class Elipse extends Figure {
+public class Elipse extends Rectangle {
 
-    public Elipse(int x, int y, int w, int h, Color fill, Color outline, int outlineThickness) {
-        super(x, y, w, h, fill, outline, outlineThickness);
+    public Elipse(int x, int y, int w, int h) {
+        super(x, y, w, h);
     }
 
     @Override
-    public void paint(Graphics2D g2d, boolean hasfocus) {
+    public void paint(Graphics2D g2d) {
+        int w = super.x2 - super.x1;
+        int h = super.y2 - super.y1;
+
         // drawing outline
         g2d.setPaint(super.outline);
-        g2d.fillOval(super.x, super.y, super.w, super.h);
+        g2d.fillOval(super.x1, super.y1, w, h);
 
         // drawing interior
         g2d.setPaint(super.fill);
         g2d.fillOval(
-            super.x + super.outlineThickness, super.y + super.outlineThickness,
-            super.w - 2*super.outlineThickness, super.h - 2*super.outlineThickness
+            super.x1 + super.outlineThickness, super.y1 + super.outlineThickness,
+            w - 2*super.outlineThickness, h - 2*super.outlineThickness
         );
-
-        if (hasfocus) {
-            g2d.setColor(Color.RED);
-            g2d.drawRect(super.x, super.y, super.w, super.h);
-        }
-    }
-
-    @Override
-    public Figure clone() {
-        return new Elipse(x, y, w, h, fill, outline, outlineThickness);
     }
 }

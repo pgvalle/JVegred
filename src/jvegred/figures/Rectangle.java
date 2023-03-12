@@ -18,6 +18,7 @@ public class Rectangle extends Figure {
         this.outlineThickness = 1;
     }
 
+    @Override
     public Figure copy() {
         int w = super.x2 - super.x1;
         int h = super.y2 - super.y1;
@@ -30,6 +31,7 @@ public class Rectangle extends Figure {
         return rect;
     }
 
+    @Override
     public void paint(Graphics2D g2d) {
         int w = super.x2 - super.x1;
         int h = super.y2 - super.y1;
@@ -46,6 +48,7 @@ public class Rectangle extends Figure {
         );
     }
 
+    @Override
     public abstract void paintFocused(Graphics2D g2d) {
         int w = super.x2 - super.x1;
         int h = super.y2 - super.y1;

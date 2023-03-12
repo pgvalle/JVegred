@@ -23,9 +23,9 @@ public class Rectangle extends Figure {
         int h = super.y2 - super.y1;
         
         Rectangle rect = new Rectangle(this.x1, this.y1, w, h);
-        rect.fill = this.fill;
-        rect.outline = this.outline;
-        rect.outlineThickness = this.outlineThickness;
+        rect.fill = new Color(this.fill);
+        rect.outline = new Color(this.outline);
+        rect.outlineThickness = new Color(this.outlineThickness);
 
         return rect;
     }

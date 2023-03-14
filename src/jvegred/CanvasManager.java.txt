@@ -1,0 +1,263 @@
+package jvegred;
+
+import java.util.ArrayList;
+
+import jvegred.figures.*;
+
+import java.awt.*;
+import java.io.*;
+import java.nio.file.Paths;
+
+class Canvas implements Serializable {
+    ArrayList<Figure> unselected = new ArrayList<Figure>();
+    ArrayList<Figure> selected = new ArrayList<Figure>();
+    ArrayList<Figure> clipboard = new ArrayList<Figure>();
+
+    Color contextFill = Color.WHITE, contextOutline = Color.BLACK;
+    int contextOutlineThinkness = 2;
+}
+
+public class CanvasManager {
+
+    public static Canvas canvas = new Canvas();
+
+    public static boolean onMultiselection = false;
+    public static boolean onResize = false;
+    public static boolean onCreate = false;
+
+    public static int propertyChangeType = 0;
+
+    // 1 = first call, 0 = post first call, -1 invalid call
+    public static int drag_resize_call = 1;
+
+    public static void paintCanvas(Graphics2D g2d) {
+        for (Figure f : canvas.unselected) f.paint(g2d, false);
+
+        int lowerX = Integer.MAX_VALUE, lowerY = Integer.MAX_VALUE;
+        int greaterX = Integer.MIN_VALUE, greaterY = Integer.MIN_VALUE;
+
+        for (Figure f : canvas.selected) {
+            lowerX = f.x < lowerX ? f.x : lowerX;
+            lowerY = f.y < lowerY ? f.y : lowerY;
+            greaterX = f.x+f.w > greaterX ? f.x+f.w : greaterX;
+            greaterY = f.y+f.h > greaterY ? f.y+f.h : greaterY;
+
+            f.paint(g2d, true);
+        }
+
+        if (canvas.selected.size() > 1) {
+            g2d.drawRect(lowerX, lowerY, greaterX-lowerX, greaterY-lowerY);
+        }
+    }
+
+    public static void toggleResize() {
+        onResize = !onResize;
+
+        if (onResize) System.out.println("Resize mode is now on");
+        else System.out.println("Resize mode is now off");
+    }
+
+    public static void serializeCanvas() {
+        try {
+            String file = Paths.get("").toAbsolutePath().toString() + "/canvas.bin";
+            FileOutputStream foutput = new FileOutputStream(file);
+            ObjectOutputStream ooutput = new ObjectOutputStream(foutput);
+
+            ooutput.writeObject(canvas);
+            ooutput.close();
+            foutput.close();
+
+            System.out.println("State successfuly saved to " + file);
+        } catch(Exception e) {
+            System.out.println("Could not write state to drive: " + e.getMessage());
+        }
+    }
+
+    public static void deserializeCanvas() {
+        try {
+            String file = Paths.get("", "canvas.bin").toAbsolutePath().toString();
+            FileInputStream finput = new FileInputStream(file);
+            ObjectInputStream oinput = new ObjectInputStream(finput);
+
+            canvas = (Canvas) oinput.readObject();
+            oinput.close();
+            finput.close();
+            
+            System.out.println("State successfuly read from " + file);
+        } catch(Exception e) {
+            System.out.println("Could not read state from drive: " + e.getMessage());
+        }
+    }
+
+    public static void selectAllFigures() {
+        for (Figure f : canvas.unselected) canvas.selected.add(0, f);
+        canvas.unselected.clear();
+    }
+
+    public static void updateSelectedFigures() {
+        for (Figure f : canvas.selected) {
+            f.fill = canvas.contextFill;
+            f.outline = canvas.contextOutline;
+            f.outlineThickness = canvas.contextOutlineThinkness;
+
+            if (f instanceof Hexagono) {
+                ((Hexagono) f).remapPoints();
+            } else if (f instanceof Triangulo) {
+                ((Triangulo) f).remapPoints();
+            }
+        }
+    }
+
+    public static void unselectAllFigures() {
+        for (Figure f : canvas.selected) canvas.unselected.add(f);
+        canvas.selected.clear();
+    }
+
+    public static boolean createFigure(int x, int y, char type) {
+        Figure f = null;
+        
+        if (type == 'e') {
+            f = new Elipse(x, y, 50, 50, canvas.contextFill, canvas.contextOutline, canvas.contextOutlineThinkness);
+        } else if (type == 'r') {
+            f = new Retangulo(x, y, 50, 50, canvas.contextFill, canvas.contextOutline, canvas.contextOutlineThinkness);
+        } else if (type == 't') {
+            f = new Triangulo(x, y, 50, 50, canvas.contextFill, canvas.contextOutline, canvas.contextOutlineThinkness);
+        } else if (type == 'h') {
+            f = new Hexagono(x, y, 50, 50, canvas.contextFill, canvas.contextOutline, canvas.contextOutlineThinkness);
+        } else return false;
+        
+        unselectAllFigures();
+        canvas.selected.add(f);
+        return true;
+    }
+
+    public static void deleteFigures() {
+        canvas.selected.clear();
+    }
+
+    public static void copyFigures() {
+        canvas.clipboard.clear();
+        canvas.clipboard = new ArrayList<Figure>();
+
+        if (!canvas.selected.isEmpty()) {
+            for (Figure f : canvas.selected) canvas.clipboard.add(f);
+            System.out.println("Selection copied to clipboard");
+        }
+    }
+
+    public static void pasteFigures(int x, int y) {
+        if (canvas.clipboard.isEmpty()) return;
+
+        unselectAllFigures();
+
+        int lowerX = Integer.MAX_VALUE, lowerY = Integer.MAX_VALUE;
+        int greaterX = Integer.MIN_VALUE, greaterY = Integer.MIN_VALUE;
+
+        for (Figure f : canvas.clipboard) {
+            lowerX = f.x < lowerX ? f.x : lowerX;
+            lowerY = f.y < lowerY ? f.y : lowerY;
+            greaterX = f.x+f.w > greaterX ? f.x+f.w : greaterX;
+            greaterY = f.y+f.h > greaterY ? f.y+f.h : greaterY;
+        }
+
+        int dx = x - (lowerX + greaterX) / 2;
+        int dy = y - (lowerY + greaterY) / 2;
+
+        for (Figure f : canvas.clipboard) {
+            Figure copy = f.clone();
+            canvas.selected.add(copy);
+            copy.drag(dx, dy);
+        }
+    }
+
+    public static void clickFigure(int x, int y) {
+        unselectAllFigures();
+
+        for (int i = canvas.unselected.size()-1; i >= 0; i--) {
+            if (canvas.unselected.get(i).click(x, y)) {
+                canvas.selected.add(canvas.unselected.get(i));
+                canvas.unselected.remove(i);
+                return;
+            }
+        }
+    }
+
+    public static void clickFigures(int x, int y) {
+        for (int i = canvas.selected.size()-1; i >= 0; i--) {
+            if (canvas.selected.get(i).click(x, y)) {
+                canvas.unselected.add(canvas.selected.get(i));
+                canvas.selected.remove(i);
+                return;
+            }
+        }
+
+        for (int i = canvas.unselected.size()-1; i >= 0; i--) {
+            if (canvas.unselected.get(i).click(x, y)) {
+                canvas.selected.add(canvas.unselected.get(i));
+                canvas.unselected.remove(i);
+                return;
+            }
+        }
+
+        unselectAllFigures();
+    }
+
+    public static void dragFigures(int x1, int y1, int x2, int y2) {
+        if (drag_resize_call == -1) return;
+        if (drag_resize_call == 0) {
+            for (Figure f : canvas.selected) f.drag(x2-x1, y2-y1);
+            return;
+        }
+
+        int lowerX = Integer.MAX_VALUE, lowerY = Integer.MAX_VALUE;
+        int greaterX = Integer.MIN_VALUE, greaterY = Integer.MIN_VALUE;
+
+        for (Figure f : canvas.selected) {
+            lowerX = f.x < lowerX ? f.x : lowerX;
+            lowerY = f.y < lowerY ? f.y : lowerY;
+            greaterX = f.x+f.w > greaterX ? f.x+f.w : greaterX;
+            greaterY = f.y+f.h > greaterY ? f.y+f.h : greaterY;
+        }
+
+        if (lowerX <= x1 && x1 <= greaterX && lowerY <= y1 && y1 <= greaterY) {
+            for (Figure f : canvas.selected) f.drag(x2-x1, y2-y1);
+            drag_resize_call = 0;
+            return;
+        }
+
+        for (int i = canvas.unselected.size()-1; i >= 0; i--) {    
+            if (canvas.unselected.get(i).click(x1, y1)) {
+                unselectAllFigures();
+                canvas.unselected.get(i).drag(x2-x1, y2-y1);
+                canvas.selected.add(canvas.unselected.get(i));
+                canvas.unselected.remove(i);
+                drag_resize_call = 0;
+                return;
+            }
+        }
+
+        drag_resize_call = -1;
+    }
+
+    public static void resizeFigure(int x1, int y1, int x2, int y2) {
+        if (drag_resize_call == -1) return;
+        if (drag_resize_call == 0) {
+            canvas.selected.get(0).resize(x1, y1, x2-x1, y2-y1);
+            return;
+        }
+
+        unselectAllFigures();
+
+        for (int i = canvas.unselected.size() - 1; i >= 0; i--) {
+            if (canvas.unselected.get(i).click(x1, y1)) {
+                canvas.unselected.get(i).resize(x1, y1, x2-x1, y2-y1);
+                canvas.selected.add(canvas.unselected.get(i));
+                canvas.unselected.remove(i);
+                drag_resize_call = 0;
+                return;
+            }
+        }
+
+        drag_resize_call = -1;
+    }
+}

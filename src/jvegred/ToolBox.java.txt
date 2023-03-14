@@ -2,65 +2,68 @@ package jvegred;
 
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
+
+import javax.tools.Tool;
 
 import jvegred.figures.*;
 
 class Button {
 
-    public static final int SIZE = 32;
-    public static final int FIGURE_SIZE = 24;
-    // public static final int this.x = 10, this.y = 35;
-    
+    public static final int SIZE = 32, FIGURE_SIZE = 24;
+    private int x, y;
     private Figure figure;
 
-    public Button(Figure figure) {
+    public Button(int x, int y, Figure figure) {
+        figure.setBoundsPoints(
+            x + (SIZE - FIGURE_SIZE)/2, x + (SIZE + FIGURE_SIZE)/2,
+            y + (SIZE - FIGURE_SIZE)/2, y + (SIZE + FIGURE_SIZE)/2
+        );
+
+        this.x = x;
+        this.y = y;
         this.figure = figure;
     }
 
-    public void paint(Graphics2D g2d) {    
+    public void paint(Graphics2D g2d) {  
+        g2d.setColor(Color.GRAY);
+        g2d.fillRect(this.x, this.y, SIZE, SIZE);  
         this.figure.paint(g2d);
     }
 
-    public void paintFocused(Graphics2D g2d) {
+    public void paintFocusRect(Graphics2D g2d) {
         g2d.setColor(Color.RED);
-        g2d.drawRect(this.figure.x1, this.figure.y1, SIZE, SIZE);
-
-        this.paint(g2d);
+        g2d.drawRect(this.x, this.y, SIZE, SIZE);
     }
 
     public void paintSelected(Graphics2D g2d) {
         g2d.setColor(Color.BLACK);
-        g2d.drawRect(this.figure.x1, this.figure.y1, SIZE, SIZE);
+        g2d.drawRect(this.x, this.y, SIZE, SIZE);
 
         this.paint(g2d);
     }
 }
 
 public class ToolBox implements MouseListener, MouseMotionListener {
-    
+
     public int x, y;
     public Button[] buttons;
     public int focused, selected;
 
-    ToolBox(int x, int y) {
-        int offset = (Button.SIZE - Button.FIGURE_SIZE) / 2;
-
+    private ToolBox(int x, int y) {
         this.x = x;
         this.y = y;
-        this.buttons = new Button[4];
+        this.buttons = new Button[5];
 
-        buttons[0] = new Button(new Elipse(this.x + offset, this.y + offset,
-            Button.FIGURE_SIZE, Button.FIGURE_SIZE));
-        buttons[1] = new Button(new Rectangl(this.x + offset + Button.SIZE,
-            this.y + offset, Button.FIGURE_SIZE, Button.FIGURE_SIZE));
-        buttons[2] = new Button(new Triangle(this.x + offset + 2*Button.SIZE,
-            this.y + offset, Button.FIGURE_SIZE, Button.FIGURE_SIZE));
-        buttons[3] = new Button(new Hexagon(this.x + offset + 3*Button.SIZE,
-            this.y + offset, Button.FIGURE_SIZE, Button.FIGURE_SIZE));
+        buttons[0] = new Button(x                , y, new Line(0, 0, 0, 0));
+        buttons[2] = new Button(x +   Button.SIZE, y, new Triangle(0, 0, 0, 0));
+        buttons[1] = new Button(x + 2*Button.SIZE, y, new Rectangl3(0, 0, 0, 0));
+        buttons[3] = new Button(x + 3*Button.SIZE, y, new Hexagon(0, 0, 0, 0));
+        buttons[0] = new Button(x + 4*Button.SIZE, y, new Elipse(0, 0, 0, 0));
 
         this.focused = this.selected = -1;
     }
+
+    public static final ToolBox toolbox = new ToolBox(10, 40); 
 
     public void paint(Graphics2D g2d) {
         // toolbox background

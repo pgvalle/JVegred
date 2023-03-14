@@ -23,29 +23,29 @@ public class Hexagon extends Rectangl {
         final int h = super.y2 - super.y1;
 
         // outline points
-        this.xOutPoints[0] = super.x1 + w / 4;
+        this.xOutPoints[0] = super.x1 +   w/4;
         this.yOutPoints[0] = super.y1;
-        this.xOutPoints[1] = super.x1 + 3*w / 4;
+        this.xOutPoints[1] = super.x1 + 3*w/4;
         this.yOutPoints[1] = super.y1;
         this.xOutPoints[2] = super.x2;
-        this.yOutPoints[2] = super.y1 + h / 2;
-        this.xOutPoints[3] = super.x1 + 3*w / 4;
+        this.yOutPoints[2] = super.y1 +   h/2;
+        this.xOutPoints[3] = super.x1 + 3*w/4;
         this.yOutPoints[3] = super.y2;
-        this.xOutPoints[4] = super.x1 + w / 4;
+        this.xOutPoints[4] = super.x1 +   w/4;
         this.yOutPoints[4] = super.y2;
         this.xOutPoints[5] = super.x1;
-        this.yOutPoints[5] = super.y1 + h / 2;
+        this.yOutPoints[5] = super.y1 +   h/2;
 
         // outline points
-        this.xInPoints[0] = super.x1 + w / 4;
+        this.xInPoints[0] = super.x1;
         this.yInPoints[0] = super.y1 + super.outlineThickness;
-        this.xInPoints[1] = super.x1 + 3*w / 4;
+        this.xInPoints[1] = super.x2;
         this.yInPoints[1] = super.y1 + super.outlineThickness;
         this.xInPoints[2] = super.x2;
         this.yInPoints[2] = super.y1 + h / 2;
-        this.xInPoints[3] = super.x1 + 3*w / 4;
+        this.xInPoints[3] = super.x2;
         this.yInPoints[3] = super.y2 - super.outlineThickness;
-        this.xInPoints[4] = super.x1 + w / 4;
+        this.xInPoints[4] = super.x1;
         this.yInPoints[4] = super.y2 - super.outlineThickness;
         this.xInPoints[5] = super.x1;
         this.yInPoints[5] = super.y1 + h / 2;

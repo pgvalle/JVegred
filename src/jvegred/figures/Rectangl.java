@@ -15,7 +15,7 @@ public class Rectangl extends Figure {
         // reasonable defaults
         this.fill = Color.WHITE;
         this.outline = Color.BLACK;
-        this.outlineThickness = 1;
+        this.outlineThickness = 2;
     }
 
     @Override

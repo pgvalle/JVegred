@@ -15,11 +15,15 @@ public abstract class Figure implements Serializable {
         this.y2 = y + h; // bottom
     }
 
+    public boolean intersectPoint(int x, int y) {
+        return this.x1 <= x && x <= this.x2 && this.y1 <= y && y <= this.y2;
+    }
+
     public abstract Figure copy();
 
     public abstract void paint(Graphics2D g2d);
 
-    public void paintFocus(Graphics2D g2d) {
+    public void paintFocusRect(Graphics2D g2d) {
         final int w = this.x2 - this.x1;
         final int h = this.y2 - this.y1;
 

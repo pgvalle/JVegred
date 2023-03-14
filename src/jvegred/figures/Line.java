@@ -15,10 +15,7 @@ public class Line extends Figure {
 
     @Override
     public Figure copy() {
-        final int w = super.x2 - super.x1;
-        final int h = super.y2 - super.y1;
-
-        Line line = new Line(this.x1, this.y1, w, h);
+        Line line = new Line(this.x1, this.y1, super.x2, super.y2);
         line.color = this.color;
         line.thickness = this.thickness;
 

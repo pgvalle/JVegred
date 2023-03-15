@@ -16,7 +16,7 @@ public class App extends JFrame {
         super.setTitle("JVegred");
         super.setSize(500, 500);
         super.setVisible(true);
-        FigureManager.instance.addFigure(new Elipse(10, 50, 60, 30));
+        FigureManager.instance.addFigure(new Ellipse(10, 50, 60, 60));
         FigureManager.instance.addFigure(new Triangle(70, 100, 100, 100));
     }
 

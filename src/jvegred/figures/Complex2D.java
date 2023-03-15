@@ -5,7 +5,7 @@ import java.awt.*;
 public class Complex2D extends Rectangl3 {
     
     protected int[] insideXs, outsideXs, insideYs, outsideYs;
-    private final int noPoints;
+    protected final int noPoints;
 
     protected Complex2D(int x, int y, int w, int h, int noPoints) {
         super(x, y, w, h);

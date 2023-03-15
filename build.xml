@@ -1,4 +1,4 @@
-<project name="JVegred" basedir="." default="main">
+<project name="JVegred" basedir="." default="jar">
 
 	<presetdef name="javac">
 		<javac includeantruntime="false" />
@@ -8,7 +8,6 @@
     <property name="build.dir"   value="build"/>
     <property name="jar.dir"     value="."/>
     <property name="main-class"  value="jvegred.App"/>
-
 
     <target name="clean">
         <delete dir="${build.dir}"/>
@@ -31,9 +30,5 @@
     <target name="run" depends="jar">
         <java jar="${jar.dir}/${ant.project.name}.jar" fork="true"/>
     </target>
-
-    <target name="clean-build" depends="clean,jar"/>
-
-    <target name="main" depends="clean,run"/>
 
 </project>

@@ -80,9 +80,8 @@ public class FigureManager {
             this.figures.get(i.intValue()).paintFocusRect(g2d);
         }
 
-        // big selection rect.
-        // Only valid if there's at least one figure selected
-        if (this.selection.size() > 0) {
+        // Draw big selection rect only when two or more figures are selected
+        if (this.selection.size() > 1) {
             g2d.setColor(Color.RED);
             g2d.drawRect(
                 this.selectionLeft, this.selectionTop,
